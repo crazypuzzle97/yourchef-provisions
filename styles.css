@@ -254,19 +254,34 @@ ul,ol,dl,dd{margin:0;padding:0;list-style:none}
 .pantry li:hover{background:#45362f;border-color:rgba(254,187,44,.4);transform:translateY(-4px)}
 .pantry strong{display:block;font-size:15px;margin-bottom:4px}
 .pantry span{font-size:13.5px;color:rgba(255,255,255,.66)}
-.season{padding:32px;border-radius:var(--r);background:var(--beige);color:var(--ink)}
-.season-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:20px}
-.season-head h3{font-size:1.6rem;font-weight:400}
-.season-head p{color:var(--muted);max-width:30em}
-.months{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
-.months button{height:36px;padding:0 14px;border-radius:var(--pill);border:1.5px solid var(--line-2);background:#fff;color:var(--ink);font:700 13px var(--font);cursor:pointer;transition:background-color .2s,color .2s,border-color .2s}
-.months button:hover{border-color:var(--brown)}
-.months button[aria-pressed="true"]{background:var(--brown);border-color:var(--brown);color:#fff}
-.season-body{display:grid;grid-template-columns:2fr 1fr;gap:32px}
-.season-body h4{font-size:14px;font-weight:800;color:var(--orange-text);margin-bottom:10px}
-.season-body ul{display:flex;flex-wrap:wrap;gap:8px}
-.season-body li{padding:6px 12px;border-radius:var(--pill);background:#fff;border:1.5px solid var(--line);font-size:14px;animation:tick .4s var(--ease) both}
-.season-note{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+.season{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.5fr);gap:56px;padding:44px;border-radius:var(--r);background:var(--brown-2);border:1.5px solid rgba(255,255,255,.07)}
+.season-kicker{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:10px}
+.season-month{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.season-month h3{flex:1;font-size:clamp(2.4rem,4vw,3.6rem);font-weight:300;letter-spacing:-.03em;color:var(--yellow);line-height:1}
+.season-month h3.swap{animation:rise .5s var(--ease)}
+.season-arrow{flex:none;width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);background:none;color:#fff;display:grid;place-items:center;cursor:pointer;transition:background-color .2s,border-color .2s,transform .2s var(--ease)}
+.season-arrow svg{width:20px;height:20px}
+.season-arrow:hover{background:var(--yellow);border-color:var(--yellow);color:var(--brown)}
+.season-arrow:active{transform:scale(.94)}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:3px;padding:4px;border-radius:14px;background:rgba(0,0,0,.18);margin-bottom:24px}
+.months button{height:40px;padding:0;border:0;border-radius:10px;background:none;color:rgba(255,255,255,.6);font:800 11.5px var(--font);letter-spacing:.02em;cursor:pointer;transition:background-color .25s,color .25s}
+.months button:hover{color:#fff;background:rgba(255,255,255,.06)}
+.months button[aria-pressed="true"]{background:var(--yellow);color:var(--brown)}
+.season-p{color:rgba(255,255,255,.78);font-size:16px;margin-bottom:16px}
+.season-note{display:flex;gap:10px;font-size:13.5px;color:rgba(255,255,255,.55);padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+.season-note::before{content:"i";flex:none;width:20px;height:20px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);display:grid;place-items:center;font-size:11px;font-weight:800;font-style:italic;margin-top:1px}
+.season-lists{display:grid;grid-template-columns:1fr 1fr;gap:12px 40px;align-content:start}
+.season-col h4{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--yellow);padding-bottom:12px;border-bottom:1.5px solid rgba(254,187,44,.35)}
+.season-col h4 img{width:20px;height:20px;object-fit:contain}
+.season-col li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.08);font-size:15.5px;animation:tick .45s var(--ease) both;animation-delay:calc(var(--i,0) * 35ms)}
+.season-col li span:first-child{min-width:0}
+.dots{flex:none;display:grid;grid-template-columns:repeat(12,7px);gap:3px}
+.dots i,.season-legend i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.14)}
+.dots i.on,.season-legend i.on{background:var(--yellow)}
+.dots i.cur,.season-legend i.cur{box-shadow:0 0 0 2px var(--brown-2),0 0 0 3.5px #fff}
+.season-legend{grid-column:1 / -1;display:flex;align-items:center;flex-wrap:wrap;gap:8px 8px;margin-top:10px;font-size:12.5px;color:rgba(255,255,255,.55)}
+.season-legend i{display:inline-block}
+.season-legend span{margin-right:12px}
 
 /* ================= Delivery ================= */
 .regions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
@@ -435,8 +450,7 @@ ul,ol,dl,dd{margin:0;padding:0;list-style:none}
   .pi{width:40px;height:40px}
   .why-grid,.regions,.steps,.scope,.row,.row-3,.footer-panel{grid-template-columns:1fr}
   .pantry{grid-template-columns:1fr 1fr}
-  .season,.form,.scope-col{padding:22px}
-  .season-body{grid-template-columns:1fr}
+  .form,.scope-col{padding:22px}
   .dates li{grid-template-columns:1fr;gap:4px}
   .wordmark{font-size:13px}
   .brand-mark{width:32px}
@@ -554,3 +568,37 @@ html[lang="el"] h1{font-size:clamp(2.1rem,4.2vw,3.6rem)}
 .pills-4{display:grid;grid-template-columns:repeat(4,1fr)}
 .pills-4 .pill span{padding:0 6px}
 @media (max-width:720px){.row-dt{grid-template-columns:minmax(0,1fr)}.pills-4{grid-template-columns:repeat(2,1fr)}}
+
+@media (max-width:1100px){.season{grid-template-columns:minmax(0,1fr);gap:36px}}
+@media (max-width:720px){
+  .season{padding:24px 18px}
+  .season-lists{grid-template-columns:minmax(0,1fr)}
+  .months{grid-template-columns:repeat(6,1fr)}
+  .season-month h3{font-size:2.3rem}
+}
+
+/* ---- inquiry polish ---- */
+.wiz-nav{position:relative;gap:2px}
+.wiz-nav li{position:relative}
+.wiz-nav li:not(:last-child)::after{content:"";position:absolute;left:31px;top:52px;bottom:-10px;width:1.5px;background:rgba(255,255,255,.14);transition:background-color .4s}
+.wiz-nav li.done:not(:last-child)::after{background:var(--yellow)}
+.wiz-nav button{position:relative;z-index:1;align-items:center;padding:12px 14px;min-height:62px}
+.wiz-nav small:empty{display:none}
+.wn{background:var(--brown)}
+.wiz-nav li.current button{background:rgba(255,255,255,.05);border-color:rgba(254,187,44,.45)}
+.wizard .summary-empty{display:flex;align-items:center;gap:16px;padding:14px 0 6px;color:var(--ink)}
+.wizard .summary-empty img{width:40px;height:40px;object-fit:contain;flex:none}
+.wizard .summary-empty div{flex:1;min-width:0}
+.wizard .summary-empty b{display:block;font-size:15px}
+.wizard .summary-empty p{font-size:14px;color:var(--muted)}
+.wizard .summary-empty .btn{flex:none}
+.wizard .form-error{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:var(--r-sm);background:#fdecea;color:#a12a17;font-size:14px;font-weight:700;animation:rise .35s var(--ease)}
+.wizard .form-error::before{content:"!";flex:none;width:22px;height:22px;border-radius:50%;background:#d9452b;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}
+@media (max-width:1024px){
+  .wiz-nav li:not(:last-child)::after{display:none}
+  .wiz-nav button{min-height:0}
+}
+@media (max-width:720px){
+  .wizard .summary-empty{flex-wrap:wrap}
+  .wizard .summary-empty .btn{width:100%}
+}

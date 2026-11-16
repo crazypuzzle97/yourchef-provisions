@@ -96,13 +96,16 @@ const MONTHS = {
   en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
   el:["Ιαν","Φεβ","Μαρ","Απρ","Μαΐ","Ιουν","Ιουλ","Αυγ","Σεπ","Οκτ","Νοε","Δεκ"]
 };
+const MONTHS_FULL = {
+  en:["January","February","March","April","May","June","July","August","September","October","November","December"],
+  el:["Ιανουάριος","Φεβρουάριος","Μάρτιος","Απρίλιος","Μάιος","Ιούνιος","Ιούλιος","Αύγουστος","Σεπτέμβριος","Οκτώβριος","Νοέμβριος","Δεκέμβριος"]
+};
 const SP = { // produce [EN, EL]
   orange:["Oranges","Πορτοκάλια"], mand:["Mandarins","Μανταρίνια"], lemon:["Lemons","Λεμόνια"], kiwi:["Kiwi","Ακτινίδια"],
   cabbage:["Cabbage","Λάχανο"], cauli:["Cauliflower","Κουνουπίδι"], broc:["Broccoli","Μπρόκολο"], leek:["Leeks","Πράσα"],
   spinach:["Spinach","Σπανάκι"], horta:["Wild greens (horta)","Άγρια χόρτα"], fennel:["Fennel","Μάραθος"], art:["Artichokes","Αγκινάρες"],
   straw:["Strawberries","Φράουλες"], broad:["Broad beans","Κουκιά"], peas:["Peas","Αρακάς"], asp:["Wild asparagus","Άγρια σπαράγγια"],
-  dill:["Dill","Άνηθος"], lettuce:["Lettuce","Μαρούλι"], newpot:["New potatoes","Φρέσκες πατάτες"], cherry:["Cherries (late May)","Κεράσια (τέλη Μαΐου)"],
-  cherries:["Cherries","Κεράσια"], loquat:["Loquats","Μούσμουλα"], apricot:["Apricots","Βερίκοκα"], zucc:["Courgettes & flowers","Κολοκυθάκια & ανθοί"],
+  dill:["Dill","Άνηθος"], lettuce:["Lettuce","Μαρούλι"], newpot:["New potatoes","Φρέσκες πατάτες"], cherries:["Cherries","Κεράσια"], loquat:["Loquats","Μούσμουλα"], apricot:["Apricots","Βερίκοκα"], zucc:["Courgettes & flowers","Κολοκυθάκια & ανθοί"],
   gbean:["Green beans","Φασολάκια"], peach:["Peaches","Ροδάκινα"], plum:["Plums","Δαμάσκηνα"], cuc:["Cucumbers","Αγγούρια"],
   tom:["Tomatoes","Ντομάτες"], basil:["Basil","Βασιλικός"], water:["Watermelon","Καρπούζι"], melon:["Melon","Πεπόνι"],
   aub:["Aubergines","Μελιτζάνες"], pep:["Peppers","Πιπεριές"], okra:["Okra","Μπάμιες"], fig:["Figs","Σύκα"], grape:["Grapes","Σταφύλια"],
@@ -121,7 +124,7 @@ const SEASON = [
   {p:"orange lemon kiwi art straw cauli broc leek fennel horta", s:"bream mullet hake cuttle shrimp urchin"},
   {p:"art straw broad peas asp fennel dill lettuce orange", s:"cuttle octo mullet hake shrimp urchin"},
   {p:"art straw broad peas asp lettuce dill newpot", s:"cuttle octo mullet bream shrimp"},
-  {p:"loquat straw cherry apricot zucc broad peas newpot gbean", s:"mullet octo bream scorp shrimp"},
+  {p:"loquat straw cherries apricot zucc broad peas newpot gbean", s:"mullet octo bream scorp shrimp"},
   {p:"cherries apricot peach plum zucc cuc tom gbean basil", s:"porgy dentex bass sardine anchovy octo"},
   {p:"tom water melon peach apricot plum aub pep okra zucc cuc", s:"porgy dentex grouper bass sardine anchovy urchin"},
   {p:"fig grape water melon peach prick tom aub pep okra", s:"porgy dentex grouper bass sardine anchovy urchin"},
@@ -200,7 +203,7 @@ const EL = {
   "how.3t":"Εγκρίνετε &amp; πληρώστε","how.3p":"Πληρωμή με σύνδεσμο κάρτας ή τραπεζική μεταφορά. Λαμβάνετε επιβεβαίωση με την ώρα παράδοσης.","how.3s":"Έως τις 14:00 για την επόμενη μέρα",
   "how.4t":"Παράδοση &amp; έλεγχος","how.4p":"Συσκευασία ανά κατηγορία, ψυχόμενα και κατεψυγμένα χωριστά. Τα ελέγχουμε μαζί σας επί τόπου.","how.4s":"Τιμολόγιο αυθημερόν",
 
-  "flow.1":"Βήμα 1 από 2","flow.2":"Βήμα 2 από 2",
+  "flow.1":"Ξεκινήστε εδώ",
   "pr.eyebrow":"Προϊόντα","pr.title":"Επιλέξτε ό,τι χρειάζεστε",
   "pr.note":"Οι τιμές της αγοράς αλλάζουν καθημερινά, γι’ αυτό κάθε είδος τιμολογείται στην προσφορά σας. Διαθέσιμα σε ποιότητα guest και crew.",
   "pr.search":"Αναζήτηση προϊόντων","pr.empty":"Δεν το βρίσκετε; Μπορούμε να το αναζητήσουμε για εσάς.",
@@ -220,8 +223,9 @@ const EL = {
   "p8t":"Μαστίχα Χίου","p8p":"Για επιδόρπια και κοκτέιλ",
   "p9t":"Ελιές Καλαμάτας ΠΟΠ","p9p":"Από τη Μεσσηνία, και κάπαρη Σαντορίνης",
   "p10t":"Ελληνικά κρασιά","p10p":"Ασύρτικο, Μαλαγουζιά, Ξινόμαυρο",
-  "se.t":"Στην εποχή τους αυτόν τον μήνα","se.p":"Μαγειρέψτε με τις ελληνικές εποχές: καλύτερα προϊόντα, συχνά καλύτερες τιμές.",
-  "se.fv":"Φρούτα &amp; λαχανικά","se.sea":"Από τη θάλασσα",
+  "se.t":"Ελληνικές εποχές","se.leg1":"Στην εποχή του","se.leg2":"Εκτός εποχής","se.leg3":"Επιλεγμένος μήνας",
+  "aria.prev":"Προηγούμενος μήνας","aria.next":"Επόμενος μήνας","se.p":"Μαγειρέψτε με τις ελληνικές εποχές: καλύτερα προϊόντα, συχνά καλύτερες τιμές.",
+  "se.fv":"Από τη γη","se.sea":"Από τη θάλασσα",
   "se.note":"Η αλιεία με μηχανότρατα απαγορεύεται στα παράκτια ύδατα από 1 Ιουνίου έως 30 Σεπτεμβρίου. Το καλοκαίρι, γαρίδες, καραβίδες και μπακαλιάρος είναι κυρίως κατεψυγμένα ή εισαγόμενα. Ενημερώστε μας νωρίς αν τα χρειάζεστε νωπά.",
 
   "del.eyebrow":"Παράδοση","del.title":"Πού παραδίδουμε και σε πόσο χρόνο",
@@ -262,7 +266,7 @@ const EL = {
 
   "or.eyebrow":"Το αίτημά σας","or.title":"Στείλτε το αίτημά σας",
   "or.lead":"Τέσσερα σύντομα βήματα. Σας απαντάμε στο WhatsApp με αναλυτική προσφορά. Καμία χρέωση πριν την εγκρίνετε.",
-  "or.noitems":"Δεν έχετε επιλέξει προϊόντα ακόμη. Δείτε τον κατάλογο ή γράψτε τη λίστα σας παρακάτω.",
+  "or.noitemsT":"Η λίστα σας είναι άδεια","or.noitems":"Επιλέξτε προϊόντα από τον κατάλογο ή γράψτε τη λίστα σας στο πλαίσιο παρακάτω.","wz.browse":"Δείτε τα προϊόντα",
   "or.wa":"WhatsApp","or.email":"Email","or.hours":"Ωράριο","or.hoursV":"Καθημερινά 08:00–22:00 τη σεζόν",
   "wz.s1":"Η λίστα σας","wz.s2":"Παράδοση","wz.s3":"Επικοινωνία","wz.s4":"Έλεγχος &amp; αποστολή",
   "wz.s1h":"Ελέγξτε τις ποσότητες και προσθέστε ό,τι δεν υπάρχει στον κατάλογο.",
@@ -397,6 +401,7 @@ function renderCart(){
   $("#summary-list").innerHTML = ls.map(l => lineHtml(l, "sum")).join("");
   $("#cart-empty").hidden = n > 0;
   $("#summary-empty").hidden = n > 0;
+  $("#more-link").hidden = n === 0;
   $("#cart-clear").hidden = n === 0;
   $$("[data-count]").forEach(el => { el.textContent = n; el.hidden = n === 0; });
   if (justAddedLine) { const li = $$("#cart-list .line").pop(); if (li) li.classList.add("just"); justAddedLine = false; }
@@ -448,6 +453,8 @@ document.addEventListener("click", e => {
   if (c){ cat = c.dataset.cat; renderCats(); renderGrid(); }
   const m = e.target.closest("[data-month]");
   if (m){ month = +m.dataset.month; renderSeason(); }
+  const ms = e.target.closest("[data-mstep]");
+  if (ms){ month = (month + 12 + +ms.dataset.mstep) % 12; renderSeason(); }
 });
 $("#search").addEventListener("input", e => { query = e.target.value; renderCats(); renderGrid(); });
 $("#add-custom").addEventListener("click", () => { addCustom(query); query = ""; $("#search").value = ""; renderAll(); });
@@ -455,11 +462,20 @@ $("#custom-form").addEventListener("submit", e => { e.preventDefault(); const i 
 $("#cart-clear").addEventListener("click", () => { cart = { items:{}, custom:[] }; save(); renderAll(); });
 
 /* ================= 8. Seasonal guide ================= */
+const AVAIL = {};   // key -> set of months in season (drives the dot strips)
+SEASON.forEach((m, i) => (m.p + " " + m.s).split(" ").forEach(k => (AVAIL[k] = AVAIL[k] || new Set()).add(i)));
+let seasonShown = null;
 function renderSeason(){
   const box = $("#months");
   if (!box.children.length) box.innerHTML = MONTHS.en.map((_, i) => `<button type="button" data-month="${i}"></button>`).join("");
   $$("button", box).forEach((b, i) => { b.textContent = MONTHS[lang][i]; b.setAttribute("aria-pressed", i === month); });
-  const li = (keys, dict) => keys.split(" ").map(k => `<li>${esc(dict[k][L()])}</li>`).join("");
+  const name = $("#season-name");
+  name.textContent = MONTHS_FULL[lang][month];
+  if (seasonShown !== null && seasonShown !== month){ name.classList.remove("swap"); void name.offsetWidth; name.classList.add("swap"); }
+  seasonShown = month;
+  const li = (keys, dict) => keys.split(" ").map((k, n) =>
+    `<li style="--i:${n}"><span>${esc(dict[k][L()])}</span><span class="dots" aria-hidden="true">${
+      Array.from({length:12}, (_, m) => `<i class="${AVAIL[k].has(m) ? "on" : ""}${m === month ? " cur" : ""}"></i>`).join("")}</span></li>`).join("");
   $("#season-produce").innerHTML = li(SEASON[month].p, SP);
   $("#season-sea").innerHTML = li(SEASON[month].s, SS);
 }

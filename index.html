@@ -169,7 +169,7 @@
   <div class="container wide">
     <div class="head">
       <div>
-        <p class="eyebrow"><span class="step-pill" data-i18n="flow.1">Step 1 of 2</span><span data-i18n="pr.eyebrow">Products</span></p>
+        <p class="eyebrow"><span class="step-pill" data-i18n="flow.1">Start here</span><span data-i18n="pr.eyebrow">Products</span></p>
         <h2 data-i18n="pr.title">Choose what you need</h2>
       </div>
       <p class="head-note" data-i18n="pr.note">Market prices change daily, so every item is priced in your quote. Guest and crew grades available.</p>
@@ -238,16 +238,28 @@
     </ul>
 
     <div class="season">
-      <div class="season-head">
-        <h3 data-i18n="se.t">In season this month</h3>
-        <p data-i18n="se.p">Cook with the Greek seasons: better produce, often better prices.</p>
+      <div class="season-side">
+        <p class="season-kicker" data-i18n="se.t">Greek seasons</p>
+        <div class="season-month">
+          <button type="button" class="season-arrow" data-mstep="-1" aria-label="Previous month" data-i18n-aria="aria.prev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 6-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <h3 id="season-name" aria-live="polite"></h3>
+          <button type="button" class="season-arrow" data-mstep="1" aria-label="Next month" data-i18n-aria="aria.next"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="months" id="months" role="group" aria-label="Month" data-i18n-aria="aria.month"></div>
+        <p class="season-p" data-i18n="se.p">Cook with the Greek seasons: better produce, often better prices.</p>
+        <p class="season-note" data-i18n="se.note">Bottom trawling is banned in Greek coastal waters from 1 June to 30 September. In summer, shrimp, langoustine and hake are mostly frozen or imported. Tell us early if your menu needs them fresh.</p>
       </div>
-      <div class="months" id="months" role="group" aria-label="Month" data-i18n-aria="aria.month"></div>
-      <div class="season-body" aria-live="polite">
-        <div><h4 data-i18n="se.fv">Fruit &amp; vegetables</h4><ul id="season-produce"></ul></div>
-        <div><h4 data-i18n="se.sea">From the sea</h4><ul id="season-sea"></ul></div>
+      <div class="season-lists">
+        <div class="season-col">
+          <h4><img src="assets/ico-olive-yellow.png" alt=""><span data-i18n="se.fv">From the land</span></h4>
+          <ul id="season-produce"></ul>
+        </div>
+        <div class="season-col">
+          <h4><img src="assets/ico-waves-yellow.png" alt=""><span data-i18n="se.sea">From the sea</span></h4>
+          <ul id="season-sea"></ul>
+        </div>
+        <p class="season-legend"><i class="on"></i><span data-i18n="se.leg1">In season</span><i></i><span data-i18n="se.leg2">Out of season</span><i class="on cur"></i><span data-i18n="se.leg3">Selected month</span></p>
       </div>
-      <p class="season-note" data-i18n="se.note">Bottom trawling is banned in Greek coastal waters from 1 June to 30 September. In summer, shrimp, langoustine and hake are mostly frozen or imported. Tell us early if your menu needs them fresh.</p>
     </div>
   </div>
 </section>
@@ -352,7 +364,7 @@
 <section class="section section-dark" id="order">
   <div class="container order">
     <aside class="order-intro">
-      <p class="eyebrow"><span class="step-pill" data-i18n="flow.2">Step 2 of 2</span><span data-i18n="or.eyebrow">Your inquiry</span></p>
+      <p class="eyebrow"><span data-i18n="or.eyebrow">Your inquiry</span></p>
       <h2 data-i18n="or.title">Send your inquiry</h2>
       <p class="muted" data-i18n="or.lead">Four quick steps. We reply on WhatsApp with your itemised quote. Nothing is charged until you approve it.</p>
       <ol class="wiz-nav" id="wiz-nav">
@@ -380,8 +392,12 @@
         <p class="wiz-hint" data-i18n="wz.s1h">Check quantities and add anything that isn’t in the catalogue.</p>
         <div class="summary">
           <ul id="summary-list"></ul>
-          <p class="summary-empty" id="summary-empty" data-i18n="or.noitems">No products selected yet. Browse the catalogue, or write your list below.</p>
-          <a href="#products" class="link-light more-link" data-i18n="wz.more">+ Add more products</a>
+          <div class="summary-empty" id="summary-empty">
+            <img src="assets/ico-bowls-orange.png" alt="">
+            <div><b data-i18n="or.noitemsT">Your list is empty</b><p data-i18n="or.noitems">Pick products from the catalogue, or write your list in the box below.</p></div>
+            <a href="#products" class="btn btn-outline btn-sm" data-i18n="wz.browse">Browse products</a>
+          </div>
+          <a href="#products" class="link-light more-link" id="more-link" data-i18n="wz.more">+ Add more products</a>
         </div>
         <div class="field">
           <span class="lbl" data-i18n="wz.grade">Quality</span>
