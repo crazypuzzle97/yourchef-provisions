@@ -602,3 +602,5 @@ html[lang="el"] h1{font-size:clamp(2.1rem,4.2vw,3.6rem)}
   .wizard .summary-empty{flex-wrap:wrap}
   .wizard .summary-empty .btn{width:100%}
 }
+@media (max-width:1024px){.wiz-nav{grid-template-columns:repeat(4,minmax(0,1fr))}.wiz-nav b{overflow-wrap:anywhere;hyphens:auto}}
+@media (max-width:400px){.wiz-nav b{font-size:11px}}
