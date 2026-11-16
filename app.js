@@ -149,6 +149,12 @@ const UI = {
     mailCut:"(List shortened for email. The full list is copied to your clipboard, paste it here.)",
     msg:{h:"New inquiry · Your Chef Provisions",name:"Name",role:"Role",phone:"Phone",email:"Email",vessel:"Yacht/villa",where:"Island",date:"Date",type:"Delivery to",berth:"Port/berth",pax:"People",guests:"Guests",crew:"Crew",grade:"Quality",list:"ORDER",notes:"Anything else"},
     items:n => `${n} ${n===1?"item":"items"}`, notesOnly:"Written list", edit:"Edit",
+    nextTo:{1:"Continue to delivery",2:"Continue to contact",3:"Review inquiry"},
+    noteLate:"It’s after 14:00, so delivery tomorrow may not be possible. We’ll confirm the earliest slot.",
+    noteOther:"Other areas need 48–72 hours. We’ll confirm the earliest date.",
+    doneWa:"Your inquiry is ready in WhatsApp", doneMail:"Your inquiry is ready in your email",
+    donePWa:"Press <b>send</b> in WhatsApp to deliver it to us.", donePMail:"Press <b>send</b> in your email app to deliver it to us.",
+    sentNav:"Sent", forL:"Inquiry for", ref:"Ref", noList:"Written list only",
     title:"Your Chef Provisions · Yacht & villa provisioning in Greece",
     desc:"Fresh provisions for yachts and villas in the Greek islands. Choose products, get an itemised quote within 2 hours, next-day delivery."
   },
@@ -165,6 +171,12 @@ const UI = {
     mailCut:"(Η λίστα συντομεύτηκε για το email. Η πλήρης λίστα αντιγράφηκε, επικολλήστε την εδώ.)",
     msg:{h:"Νέο αίτημα · Your Chef Provisions",name:"Όνομα",role:"Ιδιότητα",phone:"Τηλέφωνο",email:"Email",vessel:"Σκάφος/βίλα",where:"Νησί",date:"Ημερομηνία",type:"Παράδοση σε",berth:"Λιμάνι/θέση",pax:"Άτομα",guests:"Φιλοξενούμενοι",crew:"Πλήρωμα",grade:"Ποιότητα",list:"ΠΑΡΑΓΓΕΛΙΑ",notes:"Κάτι άλλο"},
     items:n => `${n} ${n===1?"είδος":"είδη"}`, notesOnly:"Γραπτή λίστα", edit:"Αλλαγή",
+    nextTo:{1:"Συνέχεια στην παράδοση",2:"Συνέχεια στην επικοινωνία",3:"Έλεγχος αιτήματος"},
+    noteLate:"Είναι μετά τις 14:00, οπότε η παράδοση αύριο ίσως δεν είναι εφικτή. Θα σας επιβεβαιώσουμε την πρώτη διαθέσιμη ώρα.",
+    noteOther:"Για άλλες περιοχές χρειάζονται 48–72 ώρες. Θα σας επιβεβαιώσουμε την πρώτη διαθέσιμη ημερομηνία.",
+    doneWa:"Το αίτημά σας είναι έτοιμο στο WhatsApp", doneMail:"Το αίτημά σας είναι έτοιμο στο email σας",
+    donePWa:"Πατήστε <b>αποστολή</b> στο WhatsApp για να μας το στείλετε.", donePMail:"Πατήστε <b>αποστολή</b> στην εφαρμογή email για να μας το στείλετε.",
+    sentNav:"Εστάλη", forL:"Αίτημα για", ref:"Κωδ.", noList:"Μόνο γραπτή λίστα",
     title:"Your Chef Provisions · Τροφοδοσία σκαφών & βιλών στην Ελλάδα",
     desc:"Φρέσκα τρόφιμα για σκάφη και βίλες στα ελληνικά νησιά. Επιλέξτε προϊόντα, λάβετε αναλυτική προσφορά σε 2 ώρες, παράδοση την επόμενη μέρα."
   }
@@ -282,8 +294,12 @@ const EL = {
   "fm.vessel":"Όνομα σκάφους ή βίλας","wz.email":"Email (προαιρετικό)",
   "wz.role":"Είστε","wz.r1":"Σεφ","wz.r2":"Καπετάνιος / purser","wz.r3":"Διαχειριστής βίλας","wz.r4":"Άλλο",
   "wz.s4h":"Ελέγξτε τα στοιχεία και στείλτε. Το WhatsApp ανοίγει με το αίτημα έτοιμο.",
-  "fm.sent":"Το αίτημά σας είναι έτοιμο στο WhatsApp. Πατήστε αποστολή εκεί. Δεν άνοιξε;","fm.copy":"Αντιγραφή κειμένου",
-  "fm.sendWa":"Αποστολή στο WhatsApp","fm.sendMail":"Αποστολή με email","wz.back":"Πίσω","wz.nextBtn":"Συνέχεια",
+  "wz.qd1":"Αύριο","wz.qd2":"Σε 2 μέρες","wz.qd3":"Σε μία εβδομάδα",
+  "wz.prev":"Δείτε το μήνυμα WhatsApp","wz.as1":"Καμία χρέωση τώρα","wz.as2":"Προσφορά μέσα σε 2 ώρες, 08:00–22:00","wz.as3":"Χωρίς λογαριασμό",
+  "wz.copy":"Αντιγραφή μηνύματος","wz.refL":"Κωδικός","wz.nextT":"Τι ακολουθεί",
+  "wz.n1":"Σας απαντάμε στο WhatsApp με αναλυτική προσφορά μέσα σε 2 ώρες.","wz.n2":"Εγκρίνετε και πληρώνετε με σύνδεσμο κάρτας ή τραπεζική μεταφορά.",
+  "wz.n3":"Επιβεβαιώνουμε την ώρα και παραδίδουμε με ψύξη.","wz.reopen":"Άνοιγμα WhatsApp ξανά","wz.new":"Νέο αίτημα",
+  "fm.sendWa":"Αποστολή στο WhatsApp","fm.sendMail":"Αποστολή με email","wz.back":"Πίσω",
 
   "faq.eyebrow":"Ερωτήσεις","faq.title":"Χρήσιμες πληροφορίες",
   "q1":"Πόσο νωρίτερα πρέπει να παραγγείλω;","a1":"Στα νησιά με παράδοση την επόμενη μέρα, παραγγείλτε έως τις 14:00. Για την αρχή ενός ναύλου, 3–5 μέρες νωρίτερα μας επιτρέπουν να βρούμε ειδικά προϊόντα και να ετοιμάσουμε κρέας και ψάρι σε μερίδες. Στην υπόλοιπη Ελλάδα, υπολογίστε 48–72 ώρες.",
@@ -480,13 +496,14 @@ function renderSeason(){
   $("#season-sea").innerHTML = li(SEASON[month].s, SS);
 }
 
-/* ================= 9. Inquiry (4-step wizard) ================= */
+/* ================= 9. Inquiry (4 steps + sent screen) ================= */
 const form = $("#order-form");
 const errBox = $("#form-error");
 const stepsEls = $$(".wiz-step", form);
-let wStep = 1, lastMessage = "";
+let wStep = 1, lastMessage = "", lastRef = null, lastVia = "wa";
 function localISO(d){ const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0,10); }
-const tomorrow = () => { const d = new Date(); d.setDate(d.getDate() + 1); return localISO(d); };
+const inDays = n => { const d = new Date(); d.setDate(d.getDate() + n); return localISO(d); };
+const tomorrow = () => inDays(1);
 form.date.min = tomorrow();
 function fmtDate(iso){
   const [y,m,d] = iso.split("-").map(Number);
@@ -495,6 +512,8 @@ function fmtDate(iso){
 const val = n => (form.elements[n] && form.elements[n].value || "").trim();
 const choice = n => { const i = $(`input[name="${n}"]:checked`, form); return i ? i.nextElementSibling.textContent.trim() : ""; };
 const pickedWhere = () => !!$('input[name="where"]:checked', form);
+const whereVal = () => { const i = $('input[name="where"]:checked', form); return i ? i.value : ""; };
+function makeRef(){ const d = new Date(); return `YCP-${String(d.getMonth()+1).padStart(2,"0")}${String(d.getDate()).padStart(2,"0")}-${Math.floor(1000 + Math.random()*9000)}`; }
 
 // remember what was typed (per browser)
 function saveForm(){
@@ -505,13 +524,12 @@ function restoreForm(){
   let d = null; try { d = JSON.parse(localStorage.getItem("ycp-form")); } catch(e){}
   if (!d) return;
   Object.entries(d).forEach(([k, v]) => {
-    const els = $$(`[name="${k}"]`, form);
-    els.forEach(el => { if (el.type === "radio") el.checked = el.value === v; else el.value = v; });
+    $$(`[name="${k}"]`, form).forEach(el => { if (el.type === "radio") el.checked = el.value === v; else el.value = v; });
   });
   if (form.date.value && form.date.value < tomorrow()) form.date.value = "";
 }
 
-function stepProblems(n){   // returns [fields to mark, message] or null when the wStep is complete
+function stepProblems(n){   // [fields to mark, message] or null when the step is complete
   if (n === 1) return (!lines().length && !val("notes")) ? [[form.notes], T().errEmpty] : null;
   if (n === 2){
     const bad = [];
@@ -538,60 +556,88 @@ function validateStep(n){
   return false;
 }
 
+// gentle, non-blocking hints about timing
+function dateNote(){
+  const note = $("#date-note"), d = form.date.value, w = whereVal();
+  let msg = "";
+  if (d && w === "Other" && d < inDays(2)) msg = T().noteOther;
+  else if (d && w && w !== "Other" && d === tomorrow() && new Date().getHours() >= 14) msg = T().noteLate;
+  note.textContent = msg; note.hidden = !msg;
+}
+
 function updateNav(){
   const n = lines().length;
   $("#wn-1").textContent = n ? T().items(n) : (val("notes") ? T().notesOnly : "");
   $("#wn-2").textContent = [pickedWhere() ? choice("where") : "", form.date.value ? fmtDate(form.date.value) : ""].filter(Boolean).join(" · ");
   $("#wn-3").textContent = [val("name"), val("vessel")].filter(Boolean).join(" · ");
-  $("#wn-4").textContent = "";
+  $("#wn-4").textContent = wStep === 5 && lastRef ? `${T().sentNav} · ${lastRef}` : "";
   $$("#wiz-nav li").forEach((li, i) => {
     const s = i + 1;
     li.classList.toggle("current", s === wStep);
-    li.classList.toggle("done", s < 4 && !stepProblems(s) && s !== wStep);
+    li.classList.toggle("done", wStep === 5 || (s < 4 && !stepProblems(s) && s !== wStep));
   });
 }
 function showStep(n, scroll){
   wStep = n;
   stepsEls.forEach(fs => { const on = +fs.dataset.step === n; fs.hidden = !on; if (on){ fs.classList.remove("enter"); void fs.offsetWidth; fs.classList.add("enter"); } });
-  $("#wiz-num").textContent = n;
-  $("#wiz-bar").style.width = (n / 4 * 100) + "%";
+  $("#wiz-num").textContent = Math.min(n, 4);
+  $("#wiz-bar").style.width = (Math.min(n, 4) / 4 * 100) + "%";
+  $(".wiz-top").classList.toggle("complete", n === 5);
   $("#wiz-back").style.visibility = n === 1 ? "hidden" : "visible";
-  $("#wiz-next").hidden = n === 4;
+  $("#wiz-next").hidden = n >= 4;
+  if (n < 4) $("#wiz-next-label").textContent = T().nextTo[n];
   $("#send-row").hidden = n !== 4;
-  $("#sent").hidden = true;
+  $("#wiz-actions").hidden = n === 5;
   clearMarks();
-  if (n === 4) renderReview();
+  if (n === 4){ lastRef = lastRef || makeRef(); renderReview(); }
+  if (n === 5) renderDone();
+  if (n === 2) dateNote();
   updateNav();
   if (scroll){ const top = form.getBoundingClientRect().top; if (top < 70 || top > innerHeight * .6) form.scrollIntoView({ behavior:"smooth", block:"start" }); }
 }
-function goTo(n){   // can always go back; going forward requires the earlier steps to be complete
-  for (let s = 1; s < n; s++){ if (stepProblems(s)){ showStep(s, true); validateStep(s); return; } }
+function goTo(n){   // back is always allowed; forward needs the earlier steps complete
+  for (let s = 1; s < Math.min(n, 4); s++){ if (stepProblems(s)){ showStep(s, true); validateStep(s); return; } }
   showStep(n, true);
 }
 
-function renderReview(){
-  const ls = lines(), L = T().msg, ed = s => `<button type="button" class="link-light" data-goto="${s}">${esc(T().edit)}</button>`;
-  const row = (k, v) => v ? `<div class="rv-row"><span>${esc(k)}</span><span>${esc(v)}</span></div>` : "";
-  const items = ls.length ? `<ul class="rv-list">${ls.map(l => `<li><span>${esc(l.name)}</span><span>${esc(l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q))}</span></li>`).join("")}</ul>` : "";
-  const pax = [val("guests") && `${val("guests")} ${L.guests.toLowerCase()}`, val("crew") && `${val("crew")} ${L.crew.toLowerCase()}`].filter(Boolean).join(" · ");
-  $("#review").innerHTML = `
-    <div class="rv"><div class="rv-h"><b>${esc(EN_OR_EL("wz.s1"))}</b>${ed(1)}</div>${items}${row(L.grade, choice("grade"))}${row(L.notes, val("notes"))}</div>
-    <div class="rv"><div class="rv-h"><b>${esc(EN_OR_EL("wz.s2"))}</b>${ed(2)}</div>
-      ${row(L.where, choice("where"))}${row(L.date, form.date.value ? `${fmtDate(form.date.value)} · ${choice("time")}` : "")}
-      ${row(L.type, choice("type"))}${row(L.berth, val("berth"))}${row(L.pax, pax)}</div>
-    <div class="rv"><div class="rv-h"><b>${esc(EN_OR_EL("wz.s3"))}</b>${ed(3)}</div>
-      ${row(L.name, val("name"))}${row(L.phone, val("phone"))}${row(L.vessel, val("vessel"))}${row(L.email, val("email"))}${row(L.role, choice("role"))}</div>`;
-}
 const EN_OR_EL = k => (lang === "el" ? EL[k] : EN[k] || "").replace(/&amp;/g, "&");
+const paxText = () => { const L = T().msg; return [val("guests") && `${val("guests")} ${L.guests.toLowerCase()}`, val("crew") && `${val("crew")} ${L.crew.toLowerCase()}`].filter(Boolean).join(" · "); };
+function renderReview(){
+  const ls = lines(), L = T().msg;
+  const ed = s => `<button type="button" class="tk-edit" data-goto="${s}">${esc(T().edit)}</button>`;
+  const row = (k, v) => v ? `<div class="tk-row"><span>${esc(k)}</span><span>${esc(v)}</span></div>` : "";
+  const items = ls.length
+    ? `<ul class="tk-items">${ls.map(l => `<li><span>${esc(l.name)}</span><i></i><span>${esc(l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q))}</span></li>`).join("")}</ul>`
+    : `<p class="tk-empty">${esc(T().noList)}</p>`;
+  const slot = [choice("where"), form.date.value ? fmtDate(form.date.value) : "", choice("time")].filter(Boolean).join(" · ");
+  $("#review").innerHTML = `
+    <div class="tk-head">
+      <div><small>${esc(T().forL)}</small><b>${esc(val("vessel"))}</b></div>
+      <div class="tk-meta"><span class="tk-slot">${esc(slot)}</span><span class="tk-ref">${esc(T().ref)} ${esc(lastRef)}</span></div>
+    </div>
+    <div class="tk-sec"><div class="tk-h"><b>${esc(EN_OR_EL("wz.s1"))}</b><span class="tk-count">${ls.length ? esc(T().items(ls.length)) : ""}</span>${ed(1)}</div>
+      ${items}${row(L.grade, choice("grade"))}${row(L.notes, val("notes"))}</div>
+    <div class="tk-sec"><div class="tk-h"><b>${esc(EN_OR_EL("wz.s2"))}</b>${ed(2)}</div>
+      ${row(L.type, choice("type"))}${row(L.berth, val("berth"))}${row(L.pax, paxText())}</div>
+    <div class="tk-sec"><div class="tk-h"><b>${esc(EN_OR_EL("wz.s3"))}</b>${ed(3)}</div>
+      ${row(L.name, val("name"))}${row(L.role, choice("role"))}${row(L.phone, val("phone"))}${row(L.email, val("email"))}</div>`;
+  const msg = buildMessage();
+  $("#wa-bubble").innerHTML = esc(msg).replace(/\*(.+?)\*/g, "<b>$1</b>");
+}
+function renderDone(){
+  $("#done-title").textContent = lastVia === "mail" ? T().doneMail : T().doneWa;
+  $("#done-p").innerHTML = lastVia === "mail" ? T().donePMail : T().donePWa;
+  $("#done-ref").textContent = lastRef || "";
+  $("#reopen").hidden = lastVia === "mail";
+}
 
 function buildMessage(){
-  const L = T().msg, out = [`*${L.h}*`, ""];
+  const L = T().msg, out = [`*${L.h}*`, `${T().ref}: ${lastRef}`, ""];
   const add = (k, v) => { if (v) out.push(`${L[k]}: ${v}`); };
   add("name", val("name")); add("role", choice("role")); add("phone", val("phone")); add("email", val("email")); add("vessel", val("vessel"));
   out.push("");
   add("where", choice("where")); add("date", form.date.value ? `${fmtDate(form.date.value)} · ${choice("time")}` : "");
-  add("type", choice("type")); add("berth", val("berth"));
-  add("pax", [val("guests") && `${val("guests")} ${L.guests.toLowerCase()}`, val("crew") && `${val("crew")} ${L.crew.toLowerCase()}`].filter(Boolean).join(" · "));
+  add("type", choice("type")); add("berth", val("berth")); add("pax", paxText());
   const ls = lines();
   if (ls.length){ out.push("", `*${L.list}* (${choice("grade")})`); ls.forEach(l => out.push(`• ${l.name} — ${l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q)}`)); }
   if (val("notes")) out.push("", `${L.notes}:`, val("notes"));
@@ -599,37 +645,69 @@ function buildMessage(){
 }
 function send(via){
   for (let s = 1; s <= 3; s++){ if (stepProblems(s)){ showStep(s, true); validateStep(s); return; } }
-  lastMessage = buildMessage();
+  lastRef = lastRef || makeRef();
+  lastMessage = buildMessage(); lastVia = via;
   if (via === "mail" && CONFIG.email){
     let body = lastMessage.replace(/\*/g, "");
     if (body.length > 1800){ copyText(body); body = body.slice(0, 1500) + "\n…\n" + T().mailCut; }
-    location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(T().msg.h + " · " + val("vessel"))}&body=${encodeURIComponent(body)}`;
+    location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(T().msg.h + " · " + lastRef + " · " + val("vessel"))}&body=${encodeURIComponent(body)}`;
   } else {
+    lastVia = "wa";
     window.open(waLink(lastMessage), "_blank", "noopener");
   }
-  $("#sent").hidden = false;
+  showStep(5, true);
+  setTimeout(() => $("#done-title").focus({ preventScroll:true }), 400);
 }
 
 form.addEventListener("submit", e => {
   e.preventDefault();
   const via = (e.submitter && e.submitter.dataset.send) || (wStep === 4 ? "wa" : "next");
+  if (wStep === 5) return;
   if (via === "next"){ if (validateStep(wStep)) showStep(wStep + 1, true); return; }
   send(via);
 });
 $("#send-mail").addEventListener("click", () => send("mail"));
 $("#wiz-back").addEventListener("click", () => showStep(Math.max(1, wStep - 1), true));
-form.addEventListener("input", e => { if (e.target.classList.contains("invalid")) { e.target.classList.remove("invalid"); e.target.removeAttribute("aria-invalid"); } saveForm(); updateNav(); });
-form.addEventListener("change", e => { if (e.target.name === "where") $("#where-group").classList.remove("invalid"); saveForm(); updateNav(); });
+$("#reopen").addEventListener("click", () => window.open(waLink(lastMessage), "_blank", "noopener"));
+$("#new-inquiry").addEventListener("click", () => {
+  cart = { items:{}, custom:[] }; save();
+  form.reset(); try { localStorage.removeItem("ycp-form"); } catch(e){}
+  lastRef = null; lastMessage = "";
+  renderAll(); showStep(1, false);
+  $("#products").scrollIntoView({ behavior:"smooth" });
+});
+form.addEventListener("input", e => {
+  if (e.target.classList.contains("invalid")) { e.target.classList.remove("invalid"); e.target.removeAttribute("aria-invalid"); }
+  saveForm(); updateNav(); if (e.target.name === "date") dateNote();
+});
+form.addEventListener("change", e => {
+  if (e.target.name === "where") { $("#where-group").classList.remove("invalid"); dateNote(); }
+  saveForm(); updateNav();
+});
+form.addEventListener("click", e => {
+  const q = e.target.closest("[data-days]"); if (!q) return;
+  form.date.value = inDays(+q.dataset.days);
+  form.date.classList.remove("invalid"); form.date.removeAttribute("aria-invalid");
+  saveForm(); updateNav(); dateNote();
+});
 function copyText(t){
   if (navigator.clipboard) return navigator.clipboard.writeText(t).catch(() => {});
   const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select();
   try { document.execCommand("copy"); } catch(e){} a.remove();
 }
-$("#copy-msg").addEventListener("click", e => { copyText(lastMessage.replace(/\*/g, "")); e.currentTarget.textContent = T().copied; });
-document.addEventListener("click", e => {    // wStep navigation: side list, review "Edit", cart "Continue"
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-copy]"); if (!c) return;
+  lastRef = lastRef || makeRef();
+  copyText((wStep === 5 && lastMessage ? lastMessage : buildMessage()).replace(/\*/g, ""));
+  const label = $("span", c), old = label.textContent;
+  label.textContent = T().copied; c.classList.add("copied");
+  setTimeout(() => { label.textContent = old; c.classList.remove("copied"); }, 1800);
+});
+document.addEventListener("click", e => {    // step navigation: side list, ticket "Edit", cart "Continue"
   const g = e.target.closest("[data-goto]"); if (!g) return;
   const n = +g.dataset.goto;
   if (g.tagName === "A"){ showStep(n === 2 && stepProblems(1) ? 1 : n, false); return; }   // links scroll on their own
+  if (wStep === 5 && n < 5) { lastRef = null; }   // editing after sending starts a fresh reference
   goTo(n);
 });
 restoreForm();
@@ -657,7 +735,7 @@ function setLang(next){
   document.title = T().title;
   $('meta[name="description"]').setAttribute("content", T().desc);
   updateLinks(); renderAll(); renderSeason();
-  updateNav(); if (wStep === 4) renderReview();
+  showStep(wStep, false);
   try { localStorage.setItem("lang", lang); } catch(e){}
 }
 $$(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
