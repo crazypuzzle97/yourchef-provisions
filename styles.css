@@ -847,3 +847,6 @@ html[lang="el"] h1{font-size:clamp(2.1rem,4.2vw,3.6rem)}
 .foot-list a:hover{color:var(--orange-text)}
 .footer :focus-visible{outline-color:var(--brown)}
 .marquee.marquee-big span{font-size:clamp(44px,7vw,104px);letter-spacing:-.02em}@media (max-width:720px){.marquee.marquee-big img{width:30px;height:30px}.marquee.marquee-big .marquee-track{gap:24px}}
+
+#greek{padding-top:112px}
+@media (max-width:720px){#greek{padding-top:72px}}
