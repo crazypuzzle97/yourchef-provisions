@@ -16,8 +16,8 @@
 <meta property="og:site_name" content="Your Chef Provisions">
 <meta property="og:title" content="Your Chef Provisions · Yacht &amp; villa provisioning in Greece">
 <meta property="og:description" content="Choose products, get an itemised quote within 2 hours, next-day delivery to your boat or villa.">
-<meta property="og:url" content="https://crazypuzzle97.github.io/iam-yourchef-provisions/">
-<meta property="og:image" content="https://crazypuzzle97.github.io/iam-yourchef-provisions/assets/og.jpg">
+<meta property="og:url" content="https://crazypuzzle97.github.io/yourchef-provisions/">
+<meta property="og:image" content="https://crazypuzzle97.github.io/yourchef-provisions/assets/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="en_GB">
@@ -31,7 +31,7 @@
 <body>
 <a class="skip" href="#main" data-i18n="skip">Skip to content</a>
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 <header class="site-header">
   <div class="container header-inner">
     <a class="brand" href="#top" aria-label="Your Chef Provisions, home" data-i18n-aria="aria.brand">
@@ -39,9 +39,11 @@
       <span class="wordmark"><span>Your Chef</span><span>Provisions</span></span>
     </a>
     <nav class="nav" id="nav" aria-label="Main" data-i18n-aria="aria.nav">
-      <a href="#products" data-i18n="nav.products">Products</a>
       <a href="#how" data-i18n="nav.how">How it works</a>
+      <a href="#products" data-i18n="nav.products">Products</a>
+      <a href="#greek" data-i18n="nav.greek">Greek pantry</a>
       <a href="#delivery" data-i18n="nav.delivery">Delivery</a>
+      <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
       <a href="#faq" data-i18n="nav.faq">FAQ</a>
     </nav>
     <div class="header-actions">
@@ -49,7 +51,8 @@
         <button type="button" data-lang="en" aria-pressed="true" aria-label="English" lang="en">EN</button>
         <button type="button" data-lang="el" aria-pressed="false" aria-label="Ελληνικά" lang="el">ΕΛ</button>
       </div>
-      <a class="btn btn-dark btn-sm" href="#order">
+      <a class="btn btn-dark btn-sm order-btn" href="#order">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7Zm3 0a3 3 0 0 1 6 0" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         <span data-i18n="nav.order">My order</span>
         <span class="count" data-count hidden>0</span>
       </a>
@@ -60,54 +63,125 @@
 
 <main id="main">
 
-<!-- HERO -->
+<!-- ================= HERO ================= -->
 <section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-copy">
       <p class="eyebrow" data-i18n="hero.eyebrow">Yacht &amp; villa provisioning · Greek islands</p>
-      <h1 data-i18n="hero.title">Fresh provisions, delivered to your boat or villa.</h1>
-      <p class="lead" data-i18n="hero.lead">Choose products or send your list. Get an itemised quote within 2&nbsp;hours. Next-day delivery.</p>
+      <h1 data-i18n="hero.title">Your galley, stocked. Your time, back.</h1>
+      <p class="lead" data-i18n="hero.lead">Choose products or send your list. Get an itemised quote within 2&nbsp;hours. We deliver chilled to your quay or villa kitchen, at the time you set.</p>
       <div class="btn-row">
-        <a class="btn btn-primary" href="#products" data-i18n="hero.cta">Browse products</a>
+        <a class="btn btn-primary" href="#products">
+          <span data-i18n="hero.cta">Browse products</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
         <a class="btn btn-outline" href="#" data-wa="hello">
-          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.700-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.200 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.700 2.700 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.2-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></svg>
           <span data-i18n="hero.wa">Send list on WhatsApp</span>
         </a>
       </div>
-      <ul class="facts">
-        <li><strong data-i18n="f1.t">2&nbsp;h</strong><span data-i18n="f1.p">to your quote</span></li>
-        <li><strong>14:00</strong><span data-i18n="f2.p">order cut-off for next day</span></li>
-        <li><strong>0–4&nbsp;°C</strong><span data-i18n="f3.p">cold chain to your fridge</span></li>
-      </ul>
+      <p class="hero-note" data-i18n="hero.note">No sign-up. No hidden price list. Nothing charged until you approve the quote.</p>
     </div>
-    <div class="hero-media" aria-hidden="true">
+
+    <div class="hero-media">
       <img class="m1" src="assets/produce.jpg" alt="" width="567" height="433">
       <img class="m2" src="assets/salad.jpg" alt="" width="567" height="433">
+      <figure class="quote-card" aria-label="Example of an itemised quote" data-i18n-aria="aria.quote">
+        <div class="qc-head">
+          <div><span class="qc-label" data-i18n="qc.label">Sample quote</span><strong data-i18n="qc.for">M/Y Example · Mykonos</strong></div>
+          <span class="qc-slot" data-i18n="qc.slot">Thu · 10:00–11:00</span>
+        </div>
+        <ul class="qc-lines">
+          <li><span data-i18n="qc.l1">Tomatoes, Crete</span><span>4 kg</span><span>€ 14.00</span></li>
+          <li><span data-i18n="qc.l2">Feta PDO, barrel-aged</span><span>2 kg</span><span>€ 34.00</span></li>
+          <li><span data-i18n="qc.l3">Sea bream, whole</span><span>3 kg</span><span>€ 54.00</span></li>
+          <li><span data-i18n="qc.l4">Kopanisti PDO</span><span>4 × 200 g</span><span>€ 28.00</span></li>
+          <li class="qc-del"><span data-i18n="qc.del">Chilled delivery to the quay</span><span></span><span>€ 25.00</span></li>
+        </ul>
+        <div class="qc-total"><span data-i18n="qc.total">Total, VAT included</span><strong>€ 155.00</strong></div>
+        <figcaption data-i18n="qc.caption">Illustration · example prices</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="facts">
+      <li><strong data-i18n="f1.t">2 hours</strong><span data-i18n="f1.p">to your itemised quote, 08:00–22:00</span></li>
+      <li><strong>14:00</strong><span data-i18n="f2.p">order cut-off for next-day delivery</span></li>
+      <li><strong>0–4&nbsp;°C</strong><span data-i18n="f3.p">chilled and frozen kept apart, to your fridge</span></li>
+      <li><strong>EN · ΕΛ</strong><span data-i18n="f4.p">one coordinator, in English or Greek</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="head">
+      <div>
+        <p class="eyebrow" data-i18n="why.eyebrow">Why chefs choose us</p>
+        <h2 data-i18n="why.title">Built around how chefs work</h2>
+      </div>
+      <p class="head-note" data-i18n="why.lead">We work like a chef’s own team: we know what a galley needs, when it needs it, and how it must arrive.</p>
+    </div>
+    <div class="why-grid">
+      <article class="why"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8l-4 4V5Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="why.1t">One contact, all season</h3><p data-i18n="why.1p">A named coordinator on WhatsApp for your boat or villa.</p></article>
+      <article class="why"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Zm3 5h6m-6 4h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="why.2t">Every line priced up front</h3><p data-i18n="why.2p">You approve the quote before we buy. Nothing is added after delivery.</p></article>
+      <article class="why"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21c-5-3-8-7-8-11a8 8 0 0 1 16 0c0 4-3 8-8 11Zm0-14v8m-3-5 3-3 3 3" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="why.3t">Greek produce first</h3><p data-i18n="why.3p">Island farms, fishermen and PDO producers. Imported items when your menu needs them.</p></article>
+      <article class="why"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17h18M5 17l2-6h10l2 6M9 11V7h6v4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="why.4t">Island logistics handled</h3><p data-i18n="why.4p">Ferries, meltemi days, marina access and refrigerated transport.</p></article>
+      <article class="why"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+        <h3 data-i18n="why.5t">Last-minute? Ask</h3><p data-i18n="why.5p">Menu changed at lunch? We tell you straight away what we can bring today.</p></article>
+      <article class="why"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4zM4 9h16M9 9v11" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="why.6t">Clear invoicing</h3><p data-i18n="why.6p">One Greek e-invoice per order, reported to myDATA. Captain and management see the same figures.</p></article>
     </div>
   </div>
 </section>
 
-<!-- PRODUCTS -->
+<!-- ================= HOW ================= -->
+<section class="section section-grey" id="how">
+  <div class="container">
+    <div class="head">
+      <div>
+        <p class="eyebrow" data-i18n="how.eyebrow">How it works</p>
+        <h2 data-i18n="how.title">From your list to your fridge in four steps</h2>
+      </div>
+      <p class="head-note" data-i18n="how.note">No account needed.</p>
+    </div>
+    <ol class="steps">
+      <li><span class="n">1</span><h3 data-i18n="how.1t">Choose</h3><p data-i18n="how.1p">Add products below, or send your list on WhatsApp as text, a photo or a file.</p><span class="step-time" data-i18n="how.1s">2 minutes</span></li>
+      <li><span class="n">2</span><h3 data-i18n="how.2t">Get your quote</h3><p data-i18n="how.2p">Every line shows origin, quantity and price. Out of season? We suggest an alternative.</p><span class="step-time" data-i18n="how.2s">Within 2 hours</span></li>
+      <li><span class="n">3</span><h3 data-i18n="how.3t">Approve &amp; pay</h3><p data-i18n="how.3p">Pay by card link or bank transfer. You get a confirmation with your delivery slot.</p><span class="step-time" data-i18n="how.3s">By 14:00 for next day</span></li>
+      <li><span class="n">4</span><h3 data-i18n="how.4t">Delivered &amp; checked</h3><p data-i18n="how.4p">Packed by category, chilled and frozen apart. We check it with you on the spot.</p><span class="step-time" data-i18n="how.4s">Invoice the same day</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ================= PRODUCTS ================= -->
 <section class="section" id="products">
   <div class="container">
     <div class="head">
       <div>
-        <p class="eyebrow" data-i18n="pr.eyebrow">Products</p>
+        <p class="eyebrow"><span class="step-pill" data-i18n="flow.1">Step 1 of 2</span><span data-i18n="pr.eyebrow">Products</span></p>
         <h2 data-i18n="pr.title">Choose what you need</h2>
       </div>
-      <p class="head-note" data-i18n="pr.note">Tap <b>+</b> to add. Market prices change daily, so every item is priced in your quote.</p>
+      <p class="head-note" data-i18n="pr.note">Market prices change daily, so every item is priced in your quote. Guest and crew grades available.</p>
     </div>
 
     <div class="shop">
+      <nav class="cats" id="cats" aria-label="Categories" data-i18n-aria="aria.cats"></nav>
+
       <div class="catalog">
         <div class="toolbar">
-          <div class="chips" id="chips" role="group" aria-label="Categories" data-i18n-aria="aria.cats"></div>
           <label class="search">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
             <input type="search" id="search" data-i18n-ph="pr.search" placeholder="Search products" aria-label="Search products" data-i18n-aria="aria.search">
           </label>
+          <p class="result-count" id="result-count" aria-live="polite"></p>
         </div>
-        <p class="result-count" id="result-count" aria-live="polite"></p>
         <div class="grid" id="grid"></div>
         <div class="empty" id="empty" hidden>
           <p data-i18n="pr.empty">Not on our list? We can still source it.</p>
@@ -126,46 +200,96 @@
           <input id="custom-input" data-i18n-ph="cart.customph" placeholder="Add another item…" aria-label="Add another item" data-i18n-aria="aria.custom">
           <button type="submit" class="btn btn-outline btn-sm" data-i18n="cart.add">Add</button>
         </form>
-        <a class="btn btn-primary btn-block" href="#order" data-i18n="cart.next">Continue to delivery details</a>
+        <a class="btn btn-primary btn-block" href="#order">
+          <span data-i18n="cart.next">Continue to delivery</span>
+          <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
       </aside>
     </div>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="section section-grey" id="how">
+<!-- ================= GREEK PANTRY ================= -->
+<section class="section section-dark" id="greek">
   <div class="container">
     <div class="head">
       <div>
-        <p class="eyebrow" data-i18n="how.eyebrow">How it works</p>
-        <h2 data-i18n="how.title">Three steps. No account needed.</h2>
+        <p class="eyebrow" data-i18n="gk.eyebrow">The Greek pantry</p>
+        <h2 data-i18n="gk.title">Greece on your guests’ plates</h2>
       </div>
+      <p class="head-note" data-i18n="gk.lead">Greek products guests ask for, sourced from the producers we trust.</p>
     </div>
-    <ol class="steps">
-      <li><span class="n">1</span><h3 data-i18n="how.1t">Choose</h3><p data-i18n="how.1p">Add products here, or send your list on WhatsApp as text, a photo or a file.</p></li>
-      <li><span class="n">2</span><h3 data-i18n="how.2t">Approve the quote</h3><p data-i18n="how.2p">Itemised quote within 2 hours. Pay by card link or bank transfer.</p></li>
-      <li><span class="n">3</span><h3 data-i18n="how.3t">Receive</h3><p data-i18n="how.3p">Delivered chilled at your time slot and checked with you on the spot.</p></li>
-    </ol>
+    <ul class="pantry">
+      <li><strong data-i18n="p1t">Extra-virgin olive oil</strong><span data-i18n="p1p">Single-estate, Crete &amp; Lakonia</span></li>
+      <li><strong data-i18n="p2t">Feta PDO</strong><span data-i18n="p2p">Barrel-aged, sheep &amp; goat milk</span></li>
+      <li><strong data-i18n="p3t">Graviera Naxou PDO</strong><span data-i18n="p3p">Nutty, perfect for saganaki</span></li>
+      <li><strong data-i18n="p4t">Kopanisti PDO</strong><span data-i18n="p4p">Spicy Cycladic cheese</span></li>
+      <li><strong data-i18n="p5t">Fava Santorinis PDO</strong><span data-i18n="p5p">Grass pea from volcanic soil</span></li>
+      <li><strong data-i18n="p6t">Aegina pistachios PDO</strong><span data-i18n="p6p">For pastry, ice cream, crusts</span></li>
+      <li><strong data-i18n="p7t">Thyme honey</strong><span data-i18n="p7p">From island beekeepers</span></li>
+      <li><strong data-i18n="p8t">Chios mastiha</strong><span data-i18n="p8p">Desserts and cocktails</span></li>
+      <li><strong data-i18n="p9t">Kalamata olives PDO</strong><span data-i18n="p9p">From Messinia, plus Santorini capers</span></li>
+      <li><strong data-i18n="p10t">Greek wines</strong><span data-i18n="p10p">Assyrtiko, Malagousia, Xinomavro</span></li>
+    </ul>
+
+    <div class="season">
+      <div class="season-head">
+        <h3 data-i18n="se.t">In season this month</h3>
+        <p data-i18n="se.p">Cook with the Greek seasons: better produce, often better prices.</p>
+      </div>
+      <div class="months" id="months" role="group" aria-label="Month" data-i18n-aria="aria.month"></div>
+      <div class="season-body" aria-live="polite">
+        <div><h4 data-i18n="se.fv">Fruit &amp; vegetables</h4><ul id="season-produce"></ul></div>
+        <div><h4 data-i18n="se.sea">From the sea</h4><ul id="season-sea"></ul></div>
+      </div>
+      <p class="season-note" data-i18n="se.note">Bottom trawling is banned in Greek coastal waters from 1 June to 30 September. In summer, shrimp, langoustine and hake are mostly frozen or imported. Tell us early if your menu needs them fresh.</p>
+    </div>
   </div>
 </section>
 
-<!-- WE DO / WE DON'T -->
-<section class="section" id="scope">
+<!-- ================= DELIVERY ================= -->
+<section class="section" id="delivery">
+  <div class="container">
+    <div class="head">
+      <div>
+        <p class="eyebrow" data-i18n="del.eyebrow">Delivery</p>
+        <h2 data-i18n="del.title">Where we deliver, and how fast</h2>
+      </div>
+      <p class="head-note" data-i18n="del.note">Marinas, quays and villas. At anchor, we meet your tender at the nearest quay.</p>
+    </div>
+    <div class="regions">
+      <article class="region core"><span class="tag" data-i18n="del.coreTag">Next day</span><h3 data-i18n="del.r1">Cyclades</h3><p data-i18n="del.r1p">Mykonos · Paros · Antiparos</p></article>
+      <article class="region core"><span class="tag" data-i18n="del.coreTag">Next day</span><h3 data-i18n="del.r2">Ionian</h3><p data-i18n="del.r2p">Corfu</p></article>
+      <article class="region core"><span class="tag" data-i18n="del.coreTag">Next day</span><h3 data-i18n="del.r3">Crete</h3><p data-i18n="del.r3p">Chania · Heraklion · Elounda · Agios Nikolaos</p></article>
+      <article class="region"><span class="tag tag-muted" data-i18n="del.reqTag">48–72 h · on request</span><h3 data-i18n="del.r4">Athens &amp; Saronic</h3><p data-i18n="del.r4p">Piraeus · Alimos · Lavrio · Hydra · Spetses · Porto Heli</p></article>
+      <article class="region"><span class="tag tag-muted" data-i18n="del.reqTag">48–72 h · on request</span><h3 data-i18n="del.r5">Other Cyclades</h3><p data-i18n="del.r5p">Naxos · Santorini · Syros · Milos · Ios</p></article>
+      <article class="region"><span class="tag tag-muted" data-i18n="del.reqTag">48–72 h · on request</span><h3 data-i18n="del.r6">Other Ionian</h3><p data-i18n="del.r6p">Paxos · Lefkada · Kefalonia · Zakynthos</p></article>
+    </div>
+    <div class="logistics">
+      <div><h3 data-i18n="lg.1t">Ferries &amp; meltemi</h3><p data-i18n="lg.1p">From June to September, strong winds can cancel ferries. We ship ahead and warn you the day before, never on delivery morning.</p></div>
+      <div><h3 data-i18n="lg.2t">Cold chain</h3><p data-i18n="lg.2p">Chilled at 0–4 °C and frozen at −18 °C, in separate refrigerated boxes from supplier to your fridge.</p></div>
+      <div><h3 data-i18n="lg.3t">Marina access</h3><p data-i18n="lg.3p">Send your berth and a crew contact. We arrange gate access with the marina office.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCOPE ================= -->
+<section class="section section-grey" id="scope">
   <div class="container scope">
     <div class="scope-col do">
       <h3><span class="badge-ok" aria-hidden="true">✓</span><span data-i18n="do.t">What we do</span></h3>
       <ul>
         <li data-i18n="do.1">Fresh produce, fish, meat, dairy and bakery</li>
-        <li data-i18n="do.2">Greek specialities and full pantry</li>
+        <li data-i18n="do.2">Greek specialities and a full pantry</li>
         <li data-i18n="do.3">Drinks, crew food and galley supplies</li>
         <li data-i18n="do.4">Delivery to the quay, your tender or the villa</li>
-        <li data-i18n="do.5">Itemised quote before you pay</li>
+        <li data-i18n="do.5">Sourcing of special items on request</li>
       </ul>
     </div>
     <div class="scope-col dont">
       <h3><span class="badge-no" aria-hidden="true">✕</span><span data-i18n="dont.t">What we don't do</span></h3>
       <ul>
-        <li data-i18n="dont.1">Cooking or chef services (see <a href="https://iam-yourchef.com/" target="_blank" rel="noopener">I Am Your Chef</a>)</li>
+        <li data-i18n="dont.1">Cooking or catering</li>
         <li data-i18n="dont.2">Fuel, spare parts or chandlery</li>
         <li data-i18n="dont.3">Substitutions without your OK</li>
         <li data-i18n="dont.4">Charges before you approve the quote</li>
@@ -175,44 +299,70 @@
   </div>
 </section>
 
-<!-- DELIVERY -->
-<section class="section section-grey" id="delivery">
-  <div class="container">
-    <div class="head">
-      <div>
-        <p class="eyebrow" data-i18n="del.eyebrow">Delivery</p>
-        <h2 data-i18n="del.title">Where we deliver</h2>
-      </div>
-      <p class="head-note" data-i18n="del.note">At anchor? We meet your tender at the nearest quay.</p>
+<!-- ================= PRICING ================= -->
+<section class="section" id="pricing">
+  <div class="container pricing">
+    <div class="pricing-intro">
+      <p class="eyebrow" data-i18n="pc.eyebrow">Pricing &amp; payment</p>
+      <h2 data-i18n="pc.title">Clear prices before you commit</h2>
+      <p class="muted-dark" data-i18n="pc.lead">No hidden price list and no extras after delivery. Ask for this week’s prices any time.</p>
+      <a class="btn btn-outline" href="#" data-wa="prices">
+        <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+        <span data-i18n="pc.cta">Ask for this week’s prices</span></a>
     </div>
-    <div class="zones">
-      <div class="zone zone-core">
-        <span class="tag" data-i18n="del.coreTag">Next day · order by 14:00</span>
-        <p class="places" data-i18n="del.core">Mykonos · Paros · Antiparos · Corfu · Crete</p>
-      </div>
-      <div class="zone">
-        <span class="tag tag-muted" data-i18n="del.reqTag">48–72 h · on request</span>
-        <p class="places" data-i18n="del.req">Athens &amp; Saronic · other Cyclades · Ionian</p>
-      </div>
-    </div>
+    <dl class="terms">
+      <div><dt data-i18n="t1t">What’s in a quote</dt><dd data-i18n="t1p">Product, origin, unit price and quantity on every line. Delivery is its own line. Total includes VAT.</dd></div>
+      <div><dt data-i18n="t2t">Substitutions</dt><dd data-i18n="t2p">Never without your approval. If an item fails our check on the day, we call you first.</dd></div>
+      <div><dt data-i18n="t3t">Payment</dt><dd data-i18n="t3p">Card payment link or bank transfer, in euros. Your order is confirmed once paid.</dd></div>
+      <div><dt data-i18n="t4t">Invoices</dt><dd data-i18n="t4p">Greek e-invoices reported to AADE myDATA, issued to the owning or management company.</dd></div>
+      <div><dt data-i18n="t5t">Quality guarantee</dt><dd data-i18n="t5p">Something not right? Tell us at delivery and we replace it or credit you.</dd></div>
+      <div><dt data-i18n="t6t">Guest &amp; crew grades</dt><dd data-i18n="t6p">Premium for the guest table, sensible quality for the crew mess. Tell us which in your list.</dd></div>
+    </dl>
   </div>
 </section>
 
-<!-- ORDER -->
+<!-- ================= DATES ================= -->
+<section class="section section-grey" id="dates">
+  <div class="container">
+    <div class="head">
+      <div>
+        <p class="eyebrow" data-i18n="dt.eyebrow">Plan ahead</p>
+        <h2 data-i18n="dt.title">Greek dates that affect supply in 2027</h2>
+      </div>
+      <p class="head-note" data-i18n="dt.note">Around these dates, order 48 hours earlier than usual.</p>
+    </div>
+    <ul class="dates">
+      <li><time datetime="2027-03-15" data-i18n="d1d">15 Mar</time><span data-i18n="d1">Clean Monday: public holiday, start of Lent. High demand for seafood.</span></li>
+      <li><time datetime="2027-03-25" data-i18n="d2d">25 Mar</time><span data-i18n="d2">Independence Day: public holiday.</span></li>
+      <li><time datetime="2027-04-30" data-i18n="d3d">30 Apr – 3 May</time><span data-i18n="d3">Orthodox Easter: lamb sells out early. Short hours Friday and Saturday, closed Sunday and Monday.</span></li>
+      <li><time datetime="2027-05-01" data-i18n="d4d">1 May</time><span data-i18n="d4">Labour Day: falls on Holy Saturday in 2027, so it is usually moved. Date to be confirmed.</span></li>
+      <li><time datetime="2027-06-21" data-i18n="d5d">21 Jun</time><span data-i18n="d5">Whit Monday: banks closed, some suppliers closed.</span></li>
+      <li><time datetime="2027-08-15" data-i18n="d6d">15 Aug</time><span data-i18n="d6">Assumption Day: peak season, ferries full, markets closed. Order by 12 August.</span></li>
+      <li><time datetime="2027-10-28" data-i18n="d7d">28 Oct</time><span data-i18n="d7">Ochi Day: public holiday.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= ORDER ================= -->
 <section class="section section-dark" id="order">
   <div class="container order">
     <div class="order-intro">
-      <p class="eyebrow" data-i18n="or.eyebrow">My order</p>
+      <p class="eyebrow"><span class="step-pill" data-i18n="flow.2">Step 2 of 2</span><span data-i18n="or.eyebrow">My order</span></p>
       <h2 data-i18n="or.title">Delivery details</h2>
       <p class="muted" data-i18n="or.lead">We reply on WhatsApp with your itemised quote. Nothing is charged until you approve it.</p>
       <div class="summary">
         <div class="summary-head">
           <span data-i18n="or.list">Your list</span>
-          <a href="#products" class="link-light" data-i18n="or.edit">Edit</a>
+          <a href="#products" class="link-light" data-i18n="or.edit">Edit list</a>
         </div>
         <ul id="summary-list"></ul>
         <p class="summary-empty" id="summary-empty" data-i18n="or.noitems">No products selected. Write what you need under “Anything else”.</p>
       </div>
+      <ul class="contact-list">
+        <li><span data-i18n="or.wa">WhatsApp</span><a href="#" data-wa><span data-cfg="phoneDisplay"></span></a></li>
+        <li data-if-email><span data-i18n="or.email">Email</span><a href="#" data-mail><span data-cfg="email"></span></a></li>
+        <li><span data-i18n="or.hours">Hours</span><span data-i18n="or.hoursV">Daily 08:00–22:00 in season</span></li>
+      </ul>
     </div>
 
     <form class="form" id="order-form" novalidate>
@@ -259,7 +409,7 @@
         <button type="submit" class="btn btn-primary" data-send="wa">
           <svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
           <span data-i18n="fm.sendWa">Send on WhatsApp</span></button>
-        <button type="submit" class="btn btn-outline-light" data-send="mail" data-i18n="fm.sendMail">Send by email</button>
+        <button type="submit" class="btn btn-outline-light" data-send="mail" data-if-email data-i18n="fm.sendMail">Send by email</button>
       </div>
       <div class="sent" id="sent" hidden>
         <p data-i18n="fm.sent">Your order is ready in WhatsApp. Press send there. Didn't open?</p>
@@ -269,7 +419,7 @@
   </div>
 </section>
 
-<!-- FAQ -->
+<!-- ================= FAQ ================= -->
 <section class="section" id="faq">
   <div class="container faq-wrap">
     <div>
@@ -277,35 +427,44 @@
       <h2 data-i18n="faq.title">Good to know</h2>
     </div>
     <div class="faq">
-      <details><summary data-i18n="q1">How do prices work?</summary><p data-i18n="a1">Fresh-market prices change daily. Your quote prices every item and shows VAT and delivery. You pay only after you approve it.</p></details>
-      <details><summary data-i18n="q2">How do I pay?</summary><p data-i18n="a2">By card payment link or bank transfer, in euros. The order is confirmed once paid. We issue Greek e-invoices, reported to AADE myDATA.</p></details>
-      <details><summary data-i18n="q3">What if something isn't right?</summary><p data-i18n="a3">Tell us at delivery and we replace it or credit you.</p></details>
-      <details><summary data-i18n="q4">What if a ferry is cancelled?</summary><p data-i18n="a4">From June to September, especially in July and August, strong meltemi winds can cancel ferries. We watch the forecast and warn you the day before, with an alternative.</p></details>
-      <details><summary data-i18n="q6">Is there a delivery fee or minimum order?</summary><p data-i18n="a6">Delivery is a separate line in your quote, so you see it before you pay.</p></details>
-      <details><summary data-i18n="q5">Can you find a product that isn't listed?</summary><p data-i18n="a5">Usually, yes. Add it to your list or ask on WhatsApp. We confirm availability and price in the quote.</p></details>
+      <details><summary data-i18n="q1">How far in advance should I order?</summary><p data-i18n="a1">On our next-day islands, order by 14:00 for delivery the next day. For a charter start, 3–5 days lets us source specialities and portion meat and fish. Elsewhere in Greece, allow 48–72 hours.</p></details>
+      <details><summary data-i18n="q2">Can I see prices before ordering?</summary><p data-i18n="a2">Yes. Message us on WhatsApp and we send this week’s prices for what you need. No form, no sign-up.</p></details>
+      <details><summary data-i18n="q3">Is there a delivery fee or minimum order?</summary><p data-i18n="a3">Delivery is a separate line in your quote, so you see it before you pay.</p></details>
+      <details><summary data-i18n="q4">Do you deliver on Sundays and holidays?</summary><p data-i18n="a4">In season, yes, with notice. Supply is thinner on Greek holidays, so check the dates above and order early.</p></details>
+      <details><summary data-i18n="q5">What if a ferry is cancelled?</summary><p data-i18n="a5">We warn you as soon as a sailing is at risk and offer a plan B: an earlier ferry, a local supplier on your island, or a menu change.</p></details>
+      <details><summary data-i18n="q6">Do you supply villas and private chefs?</summary><p data-i18n="a6">Yes. We supply villa kitchens, private chefs and caterers as well as yachts.</p></details>
+      <details><summary data-i18n="q7">Can you find a product that isn't listed?</summary><p data-i18n="a7">Usually, yes. Add it to your list or send a photo on WhatsApp. We confirm availability, timing and price in the quote.</p></details>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 <footer class="footer">
   <div class="container">
     <div class="footer-panel">
       <div class="footer-brand">
         <a class="brand" href="#top"><img class="brand-mark" src="assets/mark-yellow.png" alt="" width="44" height="44"><span class="wordmark"><span>Your Chef</span><span>Provisions</span></span></a>
-        <p data-i18n="ft.p">Provisioning for yachts and villas in Greece.</p>
+        <p data-i18n="ft.p">Yacht and villa provisioning across the Greek islands.</p>
       </div>
-      <ul class="foot-list">
-        <li><a href="#" data-wa><span data-cfg="phoneDisplay"></span></a></li>
-        <li><a href="#" data-mail><span data-cfg="email"></span></a></li>
-        <li data-i18n="ft.hours">Daily 08:00–22:00 in season</li>
-      </ul>
-      <a class="sister" href="https://iam-yourchef.com/" target="_blank" rel="noopener">
-        <span data-i18n="ft.sister">Part of</span>
-        <img src="assets/logo-white.png" alt="I Am Your Chef" width="134" height="30">
-      </a>
+      <div>
+        <h2 class="foot-h" data-i18n="ft.contact">Contact</h2>
+        <ul class="foot-list">
+          <li><a href="#" data-wa><span data-cfg="phoneDisplay"></span></a></li>
+          <li data-if-email><a href="#" data-mail><span data-cfg="email"></span></a></li>
+          <li data-i18n="ft.hours">Daily 08:00–22:00 in season</li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="foot-h" data-i18n="ft.menu">Menu</h2>
+        <ul class="foot-list">
+          <li><a href="#products" data-i18n="nav.products">Products</a></li>
+          <li><a href="#delivery" data-i18n="nav.delivery">Delivery</a></li>
+          <li><a href="#pricing" data-i18n="nav.pricing">Pricing</a></li>
+          <li><a href="#order" data-i18n="nav.order">My order</a></li>
+        </ul>
+      </div>
     </div>
     <div class="footer-base">
       <span>© <span id="year"></span> Your Chef Provisions</span>

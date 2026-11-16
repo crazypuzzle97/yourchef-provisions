@@ -1,11 +1,11 @@
 /* Your Chef Provisions (yourchefprovisions.com)
-   Catalogue, order list, order form, EN/EL. No build step, no dependencies. */
+   Catalogue, order list, order form, seasonal guide, EN/EL. No build step, no dependencies. */
 
 /* ================= 1. EDIT: business details ================= */
 const CONFIG = {
-  whatsapp: "306947642736",          // digits only, country code first. Shared with I Am Your Chef for now
+  whatsapp: "306947642736",          // digits only, country code first. Replace with the Provisions WhatsApp number
   phoneDisplay: "+30 694 764 2736",
-  email: "info@iam-yourchef.com"     // switch to a @yourchefprovisions.com address when it exists
+  email: ""                          // e.g. "orders@yourchefprovisions.com". Empty = email option hidden
 };
 
 /* ================= 2. Catalogue ================= */
@@ -90,35 +90,76 @@ const UNITS = { // [EN, EL, quantity step]
   bag:["bag","σακούλα",1], roll:["roll","ρολό",1], box:["box","κουτί",1], set:["set","σετ",1], custom:["","",1]
 };
 
-/* ================= 3. Text ================= */
+
+/* ================= 3. Seasonal guide (typical Greek availability) ================= */
+const MONTHS = {
+  en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+  el:["Ιαν","Φεβ","Μαρ","Απρ","Μαΐ","Ιουν","Ιουλ","Αυγ","Σεπ","Οκτ","Νοε","Δεκ"]
+};
+const SP = { // produce [EN, EL]
+  orange:["Oranges","Πορτοκάλια"], mand:["Mandarins","Μανταρίνια"], lemon:["Lemons","Λεμόνια"], kiwi:["Kiwi","Ακτινίδια"],
+  cabbage:["Cabbage","Λάχανο"], cauli:["Cauliflower","Κουνουπίδι"], broc:["Broccoli","Μπρόκολο"], leek:["Leeks","Πράσα"],
+  spinach:["Spinach","Σπανάκι"], horta:["Wild greens (horta)","Άγρια χόρτα"], fennel:["Fennel","Μάραθος"], art:["Artichokes","Αγκινάρες"],
+  straw:["Strawberries","Φράουλες"], broad:["Broad beans","Κουκιά"], peas:["Peas","Αρακάς"], asp:["Wild asparagus","Άγρια σπαράγγια"],
+  dill:["Dill","Άνηθος"], lettuce:["Lettuce","Μαρούλι"], newpot:["New potatoes","Φρέσκες πατάτες"], cherry:["Cherries (late May)","Κεράσια (τέλη Μαΐου)"],
+  cherries:["Cherries","Κεράσια"], loquat:["Loquats","Μούσμουλα"], apricot:["Apricots","Βερίκοκα"], zucc:["Courgettes & flowers","Κολοκυθάκια & ανθοί"],
+  gbean:["Green beans","Φασολάκια"], peach:["Peaches","Ροδάκινα"], plum:["Plums","Δαμάσκηνα"], cuc:["Cucumbers","Αγγούρια"],
+  tom:["Tomatoes","Ντομάτες"], basil:["Basil","Βασιλικός"], water:["Watermelon","Καρπούζι"], melon:["Melon","Πεπόνι"],
+  aub:["Aubergines","Μελιτζάνες"], pep:["Peppers","Πιπεριές"], okra:["Okra","Μπάμιες"], fig:["Figs","Σύκα"], grape:["Grapes","Σταφύλια"],
+  prick:["Prickly pears","Φραγκόσυκα"], pear:["Pears","Αχλάδια"], apple:["Apples","Μήλα"], pom:["Pomegranates","Ρόδια"],
+  pump:["Pumpkin","Κολοκύθα"], quince:["Quinces","Κυδώνια"], chest:["Chestnuts","Κάστανα"], mush:["Wild mushrooms","Άγρια μανιτάρια"],
+  oil:["Early-harvest olive oil","Αγουρέλαιο"]
+};
+const SS = { // sea [EN, EL]
+  bream:["Sea bream","Τσιπούρα"], mullet:["Red mullet","Μπαρμπούνι"], cuttle:["Cuttlefish","Σουπιά"], octo:["Octopus","Χταπόδι"],
+  shrimp:["Shrimp","Γαρίδες"], urchin:["Sea urchins","Αχινοί"], hake:["Hake (fresh)","Μπακαλιάρος (νωπός)"], squid:["Squid","Καλαμάρι"],
+  porgy:["Red porgy","Φαγκρί"], dentex:["Dentex","Συναγρίδα"], grouper:["Grouper","Ροφός"], bass:["Sea bass","Λαβράκι"],
+  sardine:["Sardines","Σαρδέλες"], anchovy:["Anchovies","Γαύρος"], bonito:["Bonito","Παλαμίδα"], scorp:["Scorpion fish","Σκορπίνα"]
+};
+const SEASON = [
+  {p:"orange mand lemon kiwi cabbage cauli broc leek spinach horta", s:"bream mullet hake cuttle shrimp urchin"},
+  {p:"orange lemon kiwi art straw cauli broc leek fennel horta", s:"bream mullet hake cuttle shrimp urchin"},
+  {p:"art straw broad peas asp fennel dill lettuce orange", s:"cuttle octo mullet hake shrimp urchin"},
+  {p:"art straw broad peas asp lettuce dill newpot", s:"cuttle octo mullet bream shrimp"},
+  {p:"loquat straw cherry apricot zucc broad peas newpot gbean", s:"mullet octo bream scorp shrimp"},
+  {p:"cherries apricot peach plum zucc cuc tom gbean basil", s:"porgy dentex bass sardine anchovy octo"},
+  {p:"tom water melon peach apricot plum aub pep okra zucc cuc", s:"porgy dentex grouper bass sardine anchovy urchin"},
+  {p:"fig grape water melon peach prick tom aub pep okra", s:"porgy dentex grouper bass sardine anchovy urchin"},
+  {p:"fig grape prick pear apple pom tom aub pep pump", s:"porgy dentex bass sardine squid bonito"},
+  {p:"pom quince apple pear grape chest pump mush cabbage", s:"squid bonito mullet hake shrimp"},
+  {p:"pom quince chest mand orange kiwi apple cabbage cauli oil", s:"squid mullet hake shrimp cuttle"},
+  {p:"orange mand lemon kiwi pom chest cabbage cauli broc leek horta", s:"bream mullet hake shrimp urchin cuttle"}
+];
+
+/* ================= 4. Text ================= */
 const UI = {
   en: {
-    cat:{all:"All",gr:"Greek",fv:"Fruit & veg",fish:"Fish & seafood",meat:"Meat & poultry",dairy:"Dairy & eggs",bakery:"Bakery",pantry:"Pantry",drinks:"Drinks",galley:"Galley & cleaning"},
+    cat:{all:"All products",gr:"Greek",fv:"Fruit & veg",fish:"Fish & seafood",meat:"Meat & poultry",dairy:"Dairy & eggs",bakery:"Bakery",pantry:"Pantry",drinks:"Drinks",galley:"Galley & cleaning"},
     results:n => `${n} ${n===1?"product":"products"}`,
     addCustom:t => `Add “${t}” to my list`,
-    add:n => `Add ${n}`, inc:n => `More ${n}`, dec:n => `Less ${n}`,
+    addLabel:"Add", add:n => `Add ${n}`, inc:n => `More ${n}`, dec:n => `Less ${n}`,
     tag:{gr:"Greek",pdo:"PDO"}, customNote:"Special request",
     errRequired:"Please fill in the highlighted fields.",
     errEmpty:"Add at least one product, or write what you need under “Anything else”.",
     errDate:"Choose a delivery date from tomorrow onwards.",
-    copied:"Copied ✓", hello:"Hi! Here is my provisioning list:",
-    mailCut:"(List shortened for email. Full list copied to your clipboard, paste it here.)",
-    msg:{h:"New order · Your Chef Provisions",name:"Name",phone:"Phone",vessel:"Yacht/villa",where:"Deliver to",berth:"Port/berth",date:"Date",pax:"Guests/crew",email:"Email",list:"ORDER",notes:"Anything else"},
+    copied:"Copied ✓", hello:"Hi! Here is my provisioning list:", prices:"Hi! Could you send this week’s prices for:",
+    mailCut:"(List shortened for email. The full list is copied to your clipboard, paste it here.)",
+    msg:{h:"New order · Your Chef Provisions",name:"Name",phone:"Phone",vessel:"Yacht/villa",where:"Deliver to",berth:"Port/berth",date:"Date",pax:"Guests/crew",list:"ORDER",notes:"Anything else"},
     title:"Your Chef Provisions · Yacht & villa provisioning in Greece",
     desc:"Fresh provisions for yachts and villas in the Greek islands. Choose products, get an itemised quote within 2 hours, next-day delivery."
   },
   el: {
-    cat:{all:"Όλα",gr:"Ελληνικά",fv:"Φρούτα & λαχανικά",fish:"Ψάρια & θαλασσινά",meat:"Κρέας & πουλερικά",dairy:"Γαλακτοκομικά & αυγά",bakery:"Αρτοποιία",pantry:"Κελάρι",drinks:"Ποτά & νερά",galley:"Κουζίνα & καθαριότητα"},
+    cat:{all:"Όλα τα προϊόντα",gr:"Ελληνικά",fv:"Φρούτα & λαχανικά",fish:"Ψάρια & θαλασσινά",meat:"Κρέας & πουλερικά",dairy:"Γαλακτοκομικά & αυγά",bakery:"Αρτοποιία",pantry:"Κελάρι",drinks:"Ποτά & νερά",galley:"Κουζίνα & καθαριότητα"},
     results:n => `${n} ${n===1?"προϊόν":"προϊόντα"}`,
     addCustom:t => `Προσθήκη «${t}» στη λίστα`,
-    add:n => `Προσθήκη: ${n}`, inc:n => `Περισσότερο: ${n}`, dec:n => `Λιγότερο: ${n}`,
+    addLabel:"Προσθήκη", add:n => `Προσθήκη: ${n}`, inc:n => `Περισσότερο: ${n}`, dec:n => `Λιγότερο: ${n}`,
     tag:{gr:"Ελληνικό",pdo:"ΠΟΠ"}, customNote:"Ειδικό αίτημα",
     errRequired:"Συμπληρώστε τα επισημασμένα πεδία.",
     errEmpty:"Προσθέστε τουλάχιστον ένα προϊόν ή γράψτε τι χρειάζεστε στο «Κάτι άλλο».",
     errDate:"Επιλέξτε ημερομηνία παράδοσης από αύριο και μετά.",
-    copied:"Αντιγράφηκε ✓", hello:"Γεια σας! Η λίστα τροφοδοσίας μου:",
+    copied:"Αντιγράφηκε ✓", hello:"Γεια σας! Η λίστα τροφοδοσίας μου:", prices:"Γεια σας! Μπορείτε να μου στείλετε τις τιμές της εβδομάδας για:",
     mailCut:"(Η λίστα συντομεύτηκε για το email. Η πλήρης λίστα αντιγράφηκε, επικολλήστε την εδώ.)",
-    msg:{h:"Νέα παραγγελία · Your Chef Provisions",name:"Όνομα",phone:"Τηλέφωνο",vessel:"Σκάφος/βίλα",where:"Παράδοση σε",berth:"Λιμάνι/θέση",date:"Ημερομηνία",pax:"Φιλοξενούμενοι/πλήρωμα",email:"Email",list:"ΠΑΡΑΓΓΕΛΙΑ",notes:"Κάτι άλλο"},
+    msg:{h:"Νέα παραγγελία · Your Chef Provisions",name:"Όνομα",phone:"Τηλέφωνο",vessel:"Σκάφος/βίλα",where:"Παράδοση σε",berth:"Λιμάνι/θέση",date:"Ημερομηνία",pax:"Φιλοξενούμενοι/πλήρωμα",list:"ΠΑΡΑΓΓΕΛΙΑ",notes:"Κάτι άλλο"},
     title:"Your Chef Provisions · Τροφοδοσία σκαφών & βιλών στην Ελλάδα",
     desc:"Φρέσκα τρόφιμα για σκάφη και βίλες στα ελληνικά νησιά. Επιλέξτε προϊόντα, λάβετε αναλυτική προσφορά σε 2 ώρες, παράδοση την επόμενη μέρα."
   }
@@ -127,109 +168,156 @@ const UI = {
 /* Greek for the static page (English lives in index.html) */
 const EL = {
   "skip":"Μετάβαση στο περιεχόμενο",
-  "nav.products":"Προϊόντα","nav.how":"Πώς λειτουργεί","nav.delivery":"Παράδοση","nav.faq":"Ερωτήσεις","nav.order":"Η παραγγελία μου",
-  "aria.brand":"Your Chef Provisions, αρχική","aria.nav":"Κύριο μενού","aria.lang":"Γλώσσα","aria.menu":"Μενού","aria.cats":"Κατηγορίες",
-  "aria.search":"Αναζήτηση προϊόντων","aria.cart":"Η παραγγελία μου","aria.custom":"Προσθέστε άλλο είδος",
+  "nav.how":"Πώς λειτουργεί","nav.products":"Προϊόντα","nav.greek":"Ελληνικό κελάρι","nav.delivery":"Παράδοση","nav.pricing":"Τιμές","nav.faq":"Ερωτήσεις","nav.order":"Η παραγγελία μου",
+  "aria.brand":"Your Chef Provisions, αρχική","aria.nav":"Κύριο μενού","aria.lang":"Γλώσσα","aria.menu":"Μενού","aria.quote":"Παράδειγμα αναλυτικής προσφοράς",
+  "aria.cats":"Κατηγορίες","aria.search":"Αναζήτηση προϊόντων","aria.cart":"Η παραγγελία μου","aria.custom":"Προσθέστε άλλο είδος","aria.month":"Μήνας",
 
   "hero.eyebrow":"Τροφοδοσία σκαφών &amp; βιλών · Ελληνικά νησιά",
-  "hero.title":"Φρέσκα τρόφιμα, στο σκάφος ή στη βίλα σας.",
-  "hero.lead":"Επιλέξτε προϊόντα ή στείλτε τη λίστα σας. Αναλυτική προσφορά μέσα σε 2&nbsp;ώρες. Παράδοση την επόμενη μέρα.",
+  "hero.title":"Η κουζίνα σας, πλήρως εφοδιασμένη. Ο χρόνος σας, πάλι δικός σας.",
+  "hero.lead":"Επιλέξτε προϊόντα ή στείλτε τη λίστα σας. Αναλυτική προσφορά μέσα σε 2&nbsp;ώρες. Παράδοση με ψύξη στην προβλήτα ή στην κουζίνα της βίλας, την ώρα που ορίζετε.",
   "hero.cta":"Δείτε τα προϊόντα","hero.wa":"Λίστα μέσω WhatsApp",
-  "f1.t":"2&nbsp;ώρες","f1.p":"για την προσφορά","f2.p":"τελευταία ώρα για αυριανή παράδοση","f3.p":"ψυχρή αλυσίδα ως το ψυγείο σας",
+  "hero.note":"Χωρίς εγγραφή. Χωρίς κρυφό τιμοκατάλογο. Καμία χρέωση πριν εγκρίνετε την προσφορά.",
+  "qc.label":"Δείγμα προσφοράς","qc.for":"M/Y Example · Μύκονος","qc.slot":"Πέμ · 10:00–11:00",
+  "qc.l1":"Ντομάτες Κρήτης","qc.l2":"Φέτα ΠΟΠ, βαρελίσια","qc.l3":"Τσιπούρα, ολόκληρη","qc.l4":"Κοπανιστή ΠΟΠ",
+  "qc.del":"Παράδοση με ψύξη στην προβλήτα","qc.total":"Σύνολο με ΦΠΑ","qc.caption":"Ενδεικτικό παράδειγμα · ενδεικτικές τιμές",
+  "f1.t":"2 ώρες","f1.p":"για την αναλυτική προσφορά, 08:00–22:00","f2.p":"τελευταία ώρα για παράδοση την επόμενη μέρα",
+  "f3.p":"ψυχόμενα και κατεψυγμένα χωριστά, ως το ψυγείο σας","f4.p":"ένας συντονιστής, στα ελληνικά ή στα αγγλικά",
 
+  "why.eyebrow":"Γιατί μας επιλέγουν οι σεφ","why.title":"Δουλεύουμε όπως η ομάδα ενός σεφ",
+  "why.lead":"Ξέρουμε τι χρειάζεται μια κουζίνα σκάφους, πότε το χρειάζεται και πώς πρέπει να φτάσει.",
+  "why.1t":"Ένας υπεύθυνος, όλη τη σεζόν","why.1p":"Ο δικός σας συντονιστής στο WhatsApp για το σκάφος ή τη βίλα σας.",
+  "why.2t":"Τιμή για κάθε προϊόν, εκ των προτέρων","why.2p":"Εγκρίνετε την προσφορά πριν αγοράσουμε. Τίποτα δεν προστίθεται μετά την παράδοση.",
+  "why.3t":"Πρώτα το ελληνικό προϊόν","why.3p":"Παραγωγοί των νησιών, ψαράδες και προϊόντα ΠΟΠ. Εισαγόμενα όταν το μενού σας τα χρειάζεται.",
+  "why.4t":"Η μεταφορά στα νησιά, δική μας δουλειά","why.4p":"Δρομολόγια πλοίων, μελτέμια, πρόσβαση στη μαρίνα και μεταφορά με ψυγείο.",
+  "why.5t":"Τελευταία στιγμή; Ρωτήστε","why.5p":"Άλλαξε το μενού το μεσημέρι; Σας λέμε αμέσως τι μπορούμε να φέρουμε σήμερα.",
+  "why.6t":"Τιμολόγηση χωρίς μπλεξίματα","why.6p":"Ένα ηλεκτρονικό τιμολόγιο ανά παραγγελία, διαβιβασμένο στο myDATA. Καπετάνιος και εταιρεία διαχείρισης βλέπουν τα ίδια ποσά.",
+
+  "how.eyebrow":"Πώς λειτουργεί","how.title":"Από τη λίστα σας στο ψυγείο σας, σε τέσσερα βήματα","how.note":"Χωρίς λογαριασμό.",
+  "how.1t":"Επιλέξτε","how.1p":"Προσθέστε προϊόντα παρακάτω ή στείλτε τη λίστα σας στο WhatsApp, ως κείμενο, φωτογραφία ή αρχείο.","how.1s":"2 λεπτά",
+  "how.2t":"Λάβετε προσφορά","how.2p":"Κάθε γραμμή δείχνει προέλευση, ποσότητα και τιμή. Εκτός εποχής; Σας προτείνουμε εναλλακτική.","how.2s":"Μέσα σε 2 ώρες",
+  "how.3t":"Εγκρίνετε &amp; πληρώστε","how.3p":"Πληρωμή με σύνδεσμο κάρτας ή τραπεζική μεταφορά. Λαμβάνετε επιβεβαίωση με την ώρα παράδοσης.","how.3s":"Έως τις 14:00 για την επόμενη μέρα",
+  "how.4t":"Παράδοση &amp; έλεγχος","how.4p":"Συσκευασία ανά κατηγορία, ψυχόμενα και κατεψυγμένα χωριστά. Τα ελέγχουμε μαζί σας επί τόπου.","how.4s":"Τιμολόγιο αυθημερόν",
+
+  "flow.1":"Βήμα 1 από 2","flow.2":"Βήμα 2 από 2",
   "pr.eyebrow":"Προϊόντα","pr.title":"Επιλέξτε ό,τι χρειάζεστε",
-  "pr.note":"Πατήστε <b>+</b> για προσθήκη. Οι τιμές της αγοράς αλλάζουν καθημερινά, γι’ αυτό κάθε είδος τιμολογείται στην προσφορά σας.",
+  "pr.note":"Οι τιμές της αγοράς αλλάζουν καθημερινά, γι’ αυτό κάθε είδος τιμολογείται στην προσφορά σας. Διαθέσιμα σε ποιότητα guest και crew.",
   "pr.search":"Αναζήτηση προϊόντων","pr.empty":"Δεν το βρίσκετε; Μπορούμε να το αναζητήσουμε για εσάς.",
   "cart.title":"Η παραγγελία μου","cart.clear":"Καθαρισμός",
   "cart.empty":"Η λίστα σας είναι άδεια. Προσθέστε προϊόντα ή γράψτε ένα είδος παρακάτω.",
-  "cart.customph":"Προσθέστε άλλο είδος…","cart.add":"Προσθήκη","cart.next":"Συνέχεια στα στοιχεία παράδοσης",
+  "cart.customph":"Προσθέστε άλλο είδος…","cart.add":"Προσθήκη","cart.next":"Συνέχεια στην παράδοση",
 
-  "how.eyebrow":"Πώς λειτουργεί","how.title":"Τρία βήματα. Χωρίς λογαριασμό.",
-  "how.1t":"Επιλέξτε","how.1p":"Προσθέστε προϊόντα εδώ ή στείλτε τη λίστα σας στο WhatsApp, ως κείμενο, φωτογραφία ή αρχείο.",
-  "how.2t":"Εγκρίνετε την προσφορά","how.2p":"Αναλυτική προσφορά μέσα σε 2 ώρες. Πληρωμή με σύνδεσμο κάρτας ή τραπεζική μεταφορά.",
-  "how.3t":"Παραλάβετε","how.3p":"Παράδοση με ψύξη την ώρα που ορίσατε και έλεγχος μαζί σας επί τόπου.",
+  "gk.eyebrow":"Το ελληνικό κελάρι","gk.title":"Η Ελλάδα στο πιάτο των φιλοξενούμενών σας",
+  "gk.lead":"Ελληνικά προϊόντα που ζητούν οι φιλοξενούμενοι, από παραγωγούς που εμπιστευόμαστε.",
+  "p1t":"Εξαιρετικό παρθένο ελαιόλαδο","p1p":"Μονοκτηματικό, Κρήτη &amp; Λακωνία",
+  "p2t":"Φέτα ΠΟΠ","p2p":"Βαρελίσια, πρόβειο &amp; κατσικίσιο γάλα",
+  "p3t":"Γραβιέρα Νάξου ΠΟΠ","p3p":"Ιδανική για σαγανάκι",
+  "p4t":"Κοπανιστή ΠΟΠ","p4p":"Πικάντικο τυρί των Κυκλάδων",
+  "p5t":"Φάβα Σαντορίνης ΠΟΠ","p5p":"Λαθούρι από ηφαιστειακό έδαφος",
+  "p6t":"Φιστίκι Αιγίνης ΠΟΠ","p6p":"Για γλυκά, παγωτό, κρούστες",
+  "p7t":"Θυμαρίσιο μέλι","p7p":"Από μελισσοκόμους των νησιών",
+  "p8t":"Μαστίχα Χίου","p8p":"Για επιδόρπια και κοκτέιλ",
+  "p9t":"Ελιές Καλαμάτας ΠΟΠ","p9p":"Από τη Μεσσηνία, και κάπαρη Σαντορίνης",
+  "p10t":"Ελληνικά κρασιά","p10p":"Ασύρτικο, Μαλαγουζιά, Ξινόμαυρο",
+  "se.t":"Στην εποχή τους αυτόν τον μήνα","se.p":"Μαγειρέψτε με τις ελληνικές εποχές: καλύτερα προϊόντα, συχνά καλύτερες τιμές.",
+  "se.fv":"Φρούτα &amp; λαχανικά","se.sea":"Από τη θάλασσα",
+  "se.note":"Η αλιεία με μηχανότρατα απαγορεύεται στα παράκτια ύδατα από 1 Ιουνίου έως 30 Σεπτεμβρίου. Το καλοκαίρι, γαρίδες, καραβίδες και μπακαλιάρος είναι κυρίως κατεψυγμένα ή εισαγόμενα. Ενημερώστε μας νωρίς αν τα χρειάζεστε νωπά.",
 
-  "do.t":"Τι κάνουμε",
-  "do.1":"Φρούτα, λαχανικά, ψάρια, κρέας, γαλακτοκομικά και αρτοσκευάσματα",
-  "do.2":"Ελληνικά προϊόντα και πλήρης αποθήκη τροφίμων",
-  "do.3":"Ποτά, φαγητό πληρώματος και αναλώσιμα κουζίνας",
-  "do.4":"Παράδοση στην προβλήτα, στο tender σας ή στη βίλα",
-  "do.5":"Αναλυτική προσφορά πριν πληρώσετε",
-  "dont.t":"Τι δεν κάνουμε",
-  "dont.1":"Μαγείρεμα ή υπηρεσίες σεφ (δείτε <a href=\"https://iam-yourchef.com/\" target=\"_blank\" rel=\"noopener\">I Am Your Chef</a>)",
-  "dont.2":"Καύσιμα, ανταλλακτικά ή ναυτιλιακά είδη",
-  "dont.3":"Αντικαταστάσεις χωρίς τη σύμφωνη γνώμη σας",
-  "dont.4":"Χρεώσεις πριν εγκρίνετε την προσφορά",
-  "dont.5":"Παραδόσεις εκτός Ελλάδας",
+  "del.eyebrow":"Παράδοση","del.title":"Πού παραδίδουμε και σε πόσο χρόνο",
+  "del.note":"Μαρίνες, προβλήτες και βίλες. Στην άγκυρα, συναντάμε το tender σας στην πλησιέστερη προβλήτα.",
+  "del.coreTag":"Επόμενη μέρα","del.reqTag":"48–72 ώρες · κατόπιν αιτήματος",
+  "del.r1":"Κυκλάδες","del.r1p":"Μύκονος · Πάρος · Αντίπαρος","del.r2":"Ιόνιο","del.r2p":"Κέρκυρα",
+  "del.r3":"Κρήτη","del.r3p":"Χανιά · Ηράκλειο · Ελούντα · Άγιος Νικόλαος",
+  "del.r4":"Αθήνα &amp; Σαρωνικός","del.r4p":"Πειραιάς · Άλιμος · Λαύριο · Ύδρα · Σπέτσες · Πόρτο Χέλι",
+  "del.r5":"Υπόλοιπες Κυκλάδες","del.r5p":"Νάξος · Σαντορίνη · Σύρος · Μήλος · Ίος",
+  "del.r6":"Υπόλοιπο Ιόνιο","del.r6p":"Παξοί · Λευκάδα · Κεφαλονιά · Ζάκυνθος",
+  "lg.1t":"Πλοία &amp; μελτέμια","lg.1p":"Από τον Ιούνιο ως τον Σεπτέμβριο, οι ισχυροί άνεμοι μπορεί να ακυρώσουν δρομολόγια. Στέλνουμε νωρίτερα και σας ενημερώνουμε την προηγούμενη μέρα, ποτέ το πρωί της παράδοσης.",
+  "lg.2t":"Ψυχρή αλυσίδα","lg.2p":"Ψυχόμενα στους 0–4 °C και κατεψυγμένα στους −18 °C, σε χωριστά ψυγεία, από τον προμηθευτή ως το ψυγείο σας.",
+  "lg.3t":"Πρόσβαση στη μαρίνα","lg.3p":"Στείλτε μας τη θέση πρόσδεσης και ένα τηλέφωνο του πληρώματος. Κανονίζουμε την είσοδο με το γραφείο της μαρίνας.",
 
-  "del.eyebrow":"Παράδοση","del.title":"Πού παραδίδουμε",
-  "del.note":"Στην άγκυρα; Συναντάμε το tender σας στην πλησιέστερη προβλήτα.",
-  "del.coreTag":"Επόμενη μέρα · παραγγελία έως 14:00","del.core":"Μύκονος · Πάρος · Αντίπαρος · Κέρκυρα · Κρήτη",
-  "del.reqTag":"48–72 ώρες · κατόπιν αιτήματος","del.req":"Αθήνα &amp; Σαρωνικός · υπόλοιπες Κυκλάδες · Ιόνιο",
+  "do.t":"Τι κάνουμε","do.1":"Φρούτα, λαχανικά, ψάρια, κρέας, γαλακτοκομικά και αρτοσκευάσματα","do.2":"Ελληνικά προϊόντα και πλήρης αποθήκη τροφίμων",
+  "do.3":"Ποτά, φαγητό πληρώματος και αναλώσιμα κουζίνας","do.4":"Παράδοση στην προβλήτα, στο tender σας ή στη βίλα","do.5":"Αναζήτηση ειδικών προϊόντων κατόπιν αιτήματος",
+  "dont.t":"Τι δεν κάνουμε","dont.1":"Μαγείρεμα ή catering","dont.2":"Καύσιμα, ανταλλακτικά ή ναυτιλιακά είδη",
+  "dont.3":"Αντικαταστάσεις χωρίς τη σύμφωνη γνώμη σας","dont.4":"Χρεώσεις πριν εγκρίνετε την προσφορά","dont.5":"Παραδόσεις εκτός Ελλάδας",
+
+  "pc.eyebrow":"Τιμές &amp; πληρωμή","pc.title":"Ξεκάθαρες τιμές πριν δεσμευτείτε",
+  "pc.lead":"Χωρίς κρυφό τιμοκατάλογο και χωρίς επιπλέον χρεώσεις μετά την παράδοση. Ζητήστε τις τιμές της εβδομάδας όποτε θέλετε.",
+  "pc.cta":"Ζητήστε τις τιμές της εβδομάδας",
+  "t1t":"Τι περιέχει η προσφορά","t1p":"Προϊόν, προέλευση, τιμή μονάδας και ποσότητα σε κάθε γραμμή. Η παράδοση είναι ξεχωριστή γραμμή. Το σύνολο περιλαμβάνει ΦΠΑ.",
+  "t2t":"Αντικαταστάσεις","t2p":"Ποτέ χωρίς την έγκρισή σας. Αν ένα προϊόν δεν περάσει τον έλεγχό μας, σας τηλεφωνούμε πρώτα.",
+  "t3t":"Πληρωμή","t3p":"Σύνδεσμος πληρωμής με κάρτα ή τραπεζική μεταφορά, σε ευρώ. Η παραγγελία επιβεβαιώνεται με την πληρωμή.",
+  "t4t":"Τιμολόγια","t4p":"Ηλεκτρονικά τιμολόγια διαβιβασμένα στο myDATA της ΑΑΔΕ, στο όνομα της πλοιοκτήτριας ή της εταιρείας διαχείρισης.",
+  "t5t":"Εγγύηση ποιότητας","t5p":"Κάτι δεν είναι όπως πρέπει; Πείτε μας κατά την παράδοση και το αντικαθιστούμε ή σας πιστώνουμε την αξία του.",
+  "t6t":"Ποιότητα guest &amp; crew","t6p":"Κορυφαία ποιότητα για το τραπέζι των φιλοξενούμενων, λογική ποιότητα για το mess του πληρώματος. Σημειώστε το στη λίστα σας.",
+
+  "dt.eyebrow":"Προγραμματίστε έγκαιρα","dt.title":"Ελληνικές ημερομηνίες που επηρεάζουν την τροφοδοσία το 2027","dt.note":"Γύρω από αυτές τις ημερομηνίες, παραγγείλτε 48 ώρες νωρίτερα.",
+  "d1d":"15 Μαρ","d1":"Καθαρά Δευτέρα: αργία, αρχή της Σαρακοστής. Αυξημένη ζήτηση για θαλασσινά.",
+  "d2d":"25 Μαρ","d2":"Εθνική επέτειος: αργία.",
+  "d3d":"30 Απρ – 3 Μαΐ","d3":"Ορθόδοξο Πάσχα: το αρνί εξαντλείται νωρίς. Μειωμένο ωράριο Παρασκευή και Σάββατο, κλειστά Κυριακή και Δευτέρα.",
+  "d4d":"1 Μαΐ","d4":"Εργατική Πρωτομαγιά: το 2027 συμπίπτει με το Μεγάλο Σάββατο και συνήθως μετατίθεται. Η ημερομηνία θα επιβεβαιωθεί.",
+  "d5d":"21 Ιουν","d5":"Αγίου Πνεύματος: κλειστές τράπεζες, κάποιοι προμηθευτές κλειστοί.",
+  "d6d":"15 Αυγ","d6":"Δεκαπενταύγουστος: αιχμή της σεζόν, γεμάτα πλοία, κλειστές αγορές. Παραγγείλτε έως τις 12 Αυγούστου.",
+  "d7d":"28 Οκτ","d7":"Επέτειος του «Όχι»: αργία.",
 
   "or.eyebrow":"Η παραγγελία μου","or.title":"Στοιχεία παράδοσης",
-  "or.lead":"Σας απαντάμε στο WhatsApp με αναλυτική προσφορά. Δεν χρεώνεται τίποτα πριν την εγκρίνετε.",
-  "or.list":"Η λίστα σας","or.edit":"Αλλαγή",
+  "or.lead":"Σας απαντάμε στο WhatsApp με αναλυτική προσφορά. Καμία χρέωση πριν την εγκρίνετε.",
+  "or.list":"Η λίστα σας","or.edit":"Αλλαγή λίστας",
   "or.noitems":"Δεν έχετε επιλέξει προϊόντα. Γράψτε τι χρειάζεστε στο «Κάτι άλλο».",
+  "or.wa":"WhatsApp","or.email":"Email","or.hours":"Ωράριο","or.hoursV":"Καθημερινά 08:00–22:00 τη σεζόν",
   "fm.name":"Ονοματεπώνυμο","fm.phone":"Τηλέφωνο / WhatsApp","fm.vessel":"Σκάφος ή βίλα","fm.where":"Παράδοση σε",
   "fm.choose":"Επιλέξτε…","fm.l1":"Μύκονος","fm.l2":"Πάρος","fm.l3":"Αντίπαρος","fm.l4":"Κέρκυρα","fm.l5":"Κρήτη","fm.other":"Άλλο (48–72 ώρες)",
   "fm.date":"Ημερομηνία","fm.time":"Ώρα","fm.t1":"Πρωί (08–12)","fm.t2":"Μεσημέρι (12–16)","fm.t3":"Απόγευμα (16–20)","fm.t4":"Ευέλικτα",
   "fm.pax":"Φιλοξενούμενοι / πλήρωμα","fm.berth":"Λιμάνι και θέση πρόσδεσης ή διεύθυνση βίλας",
-  "fm.notes":"Κάτι άλλο (είδη, αλλεργίες, μάρκες)",
-  "fm.sendWa":"Αποστολή στο WhatsApp","fm.sendMail":"Αποστολή με email",
+  "fm.notes":"Κάτι άλλο (είδη, αλλεργίες, μάρκες)","fm.sendWa":"Αποστολή στο WhatsApp","fm.sendMail":"Αποστολή με email",
   "fm.sent":"Η παραγγελία σας είναι έτοιμη στο WhatsApp. Πατήστε αποστολή εκεί. Δεν άνοιξε;","fm.copy":"Αντιγραφή κειμένου",
 
   "faq.eyebrow":"Ερωτήσεις","faq.title":"Χρήσιμες πληροφορίες",
-  "q1":"Πώς διαμορφώνονται οι τιμές;",
-  "a1":"Οι τιμές της αγοράς αλλάζουν καθημερινά. Η προσφορά σας τιμολογεί κάθε είδος και δείχνει ΦΠΑ και κόστος παράδοσης. Πληρώνετε μόνο αφού την εγκρίνετε.",
-  "q2":"Πώς πληρώνω;",
-  "a2":"Με σύνδεσμο πληρωμής με κάρτα ή με τραπεζική μεταφορά, σε ευρώ. Η παραγγελία επιβεβαιώνεται με την πληρωμή. Εκδίδουμε ηλεκτρονικά τιμολόγια που διαβιβάζονται στο myDATA της ΑΑΔΕ.",
-  "q3":"Κι αν κάτι δεν είναι όπως πρέπει;","a3":"Πείτε μας κατά την παράδοση και θα το αντικαταστήσουμε ή θα σας πιστώσουμε την αξία του.",
-  "q4":"Κι αν ακυρωθεί ένα δρομολόγιο πλοίου;",
-  "a4":"Από τον Ιούνιο ως τον Σεπτέμβριο, ιδίως τον Ιούλιο και τον Αύγουστο, τα μελτέμια μπορεί να ακυρώσουν δρομολόγια. Παρακολουθούμε τον καιρό και σας ενημερώνουμε την προηγούμενη μέρα, με εναλλακτική λύση.",
-  "q6":"Υπάρχει κόστος παράδοσης ή ελάχιστη παραγγελία;","a6":"Το κόστος παράδοσης εμφανίζεται ως ξεχωριστή γραμμή στην προσφορά, ώστε να το βλέπετε πριν πληρώσετε.",
-  "q5":"Βρίσκετε προϊόντα που δεν είναι στη λίστα;","a5":"Συνήθως ναι. Προσθέστε το στη λίστα σας ή ρωτήστε μας στο WhatsApp. Επιβεβαιώνουμε διαθεσιμότητα και τιμή στην προσφορά.",
+  "q1":"Πόσο νωρίτερα πρέπει να παραγγείλω;","a1":"Στα νησιά με παράδοση την επόμενη μέρα, παραγγείλτε έως τις 14:00. Για την αρχή ενός ναύλου, 3–5 μέρες νωρίτερα μας επιτρέπουν να βρούμε ειδικά προϊόντα και να ετοιμάσουμε κρέας και ψάρι σε μερίδες. Στην υπόλοιπη Ελλάδα, υπολογίστε 48–72 ώρες.",
+  "q2":"Μπορώ να δω τιμές πριν παραγγείλω;","a2":"Ναι. Στείλτε μας μήνυμα στο WhatsApp και σας στέλνουμε τις τιμές της εβδομάδας για ό,τι χρειάζεστε. Χωρίς φόρμα, χωρίς εγγραφή.",
+  "q3":"Υπάρχει κόστος παράδοσης ή ελάχιστη παραγγελία;","a3":"Το κόστος παράδοσης εμφανίζεται ως ξεχωριστή γραμμή στην προσφορά, ώστε να το βλέπετε πριν πληρώσετε.",
+  "q4":"Παραδίδετε Κυριακές και αργίες;","a4":"Τη σεζόν ναι, με έγκαιρη ενημέρωση. Στις αργίες η αγορά υπολειτουργεί, οπότε δείτε τις ημερομηνίες παραπάνω και παραγγείλτε νωρίτερα.",
+  "q5":"Κι αν ακυρωθεί ένα δρομολόγιο;","a5":"Σας ενημερώνουμε μόλις κάποιο δρομολόγιο κινδυνεύσει και προτείνουμε λύση: προηγούμενο δρομολόγιο, τοπικό προμηθευτή στο νησί σας ή αλλαγή στο μενού.",
+  "q6":"Εξυπηρετείτε βίλες και ιδιωτικούς σεφ;","a6":"Ναι. Εκτός από σκάφη, προμηθεύουμε κουζίνες βιλών, ιδιωτικούς σεφ και εταιρείες catering.",
+  "q7":"Βρίσκετε προϊόντα που δεν είναι στη λίστα;","a7":"Συνήθως ναι. Προσθέστε το στη λίστα σας ή στείλτε μια φωτογραφία στο WhatsApp. Επιβεβαιώνουμε διαθεσιμότητα, χρόνο και τιμή στην προσφορά.",
 
-  "ft.p":"Τροφοδοσία σκαφών και βιλών στην Ελλάδα.","ft.hours":"Καθημερινά 08:00–22:00 τη σεζόν",
-  "ft.sister":"Μέρος της οικογένειας","ft.terms":"Όροι","ft.privacy":"Απόρρητο",
+  "ft.p":"Τροφοδοσία σκαφών και βιλών στα ελληνικά νησιά.","ft.contact":"Επικοινωνία","ft.hours":"Καθημερινά 08:00–22:00 τη σεζόν",
+  "ft.menu":"Μενού","ft.terms":"Όροι","ft.privacy":"Απόρρητο",
   "bar.list":"Η παραγγελία μου","bar.next":"Συνέχεια →"
 };
 
-/* ================= 4. State ================= */
+/* ================= 5. State ================= */
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const EN = {};
-let lang = "en", query = "";
-let cat = window.matchMedia("(max-width:720px)").matches ? "fv" : "all";  // phones open on one category
+let lang = "en", query = "", month = new Date().getMonth();
+let cat = window.matchMedia("(max-width:720px)").matches ? "fv" : "all";   // phones open on one category
 let cart = { items:{}, custom:[] };   // items: {id: qty}; custom: [{id, name, qty}]
 try { const c = JSON.parse(localStorage.getItem("ycp-cart")); if (c && c.items && Array.isArray(c.custom)) cart = c; } catch(e){}
 const save = () => { try { localStorage.setItem("ycp-cart", JSON.stringify(cart)); } catch(e){} };
 const T = () => UI[lang];
+const L = () => lang === "el" ? 1 : 0;
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const norm = s => s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 const pname = p => lang === "el" ? p.el : p.en;
 const pnote = p => lang === "el" ? p.noteEl : p.noteEn;
 const fmtQty = q => lang === "el" ? String(q).replace(".", ",") : String(q);
+const unitText = unit => unit === "custom" ? T().customNote : UNITS[unit][L()];
 function qtyLabel(unit, q){
-  const u = UNITS[unit][lang === "el" ? 1 : 0];
-  if (unit === "custom") return fmtQty(q);
-  if (unit === "kg" || unit === "l") return `${fmtQty(q)} ${u}`;
-  if (unit === "pc") return `${fmtQty(q)} ${u}`;
-  return `${fmtQty(q)} × ${u}`;
+  if (unit === "custom") return T().customNote;
+  if (unit === "kg" || unit === "l" || unit === "pc") return `${fmtQty(q)} ${unitText(unit)}`;
+  return `${fmtQty(q)} × ${unitText(unit)}`;
 }
-const unitText = unit => unit === "custom" ? T().customNote : UNITS[unit][lang === "el" ? 1 : 0];
 
-/* ================= 5. Catalogue rendering ================= */
+/* ================= 6. Catalogue ================= */
 const inCat = (p, c) => c === "all" || (c === "gr" ? p.tags.includes("gr") : p.cat === c);
 const matches = p => !query || norm(`${p.en} ${p.el} ${p.noteEn} ${p.noteEl}`).includes(norm(query));
+const PLUS = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`;
 
-function renderChips(){
-  $("#chips").innerHTML = CATS.map(c => {
+function renderCats(){
+  $("#cats").innerHTML = CATS.map(c => {
     const n = PRODUCTS.filter(p => inCat(p, c) && matches(p)).length;
-    return `<button type="button" class="chip" data-cat="${c}" aria-pressed="${c===cat}">${esc(T().cat[c])}<small>${n}</small></button>`;
+    return `<button type="button" class="cat" data-cat="${c}" aria-pressed="${c===cat}"><span>${esc(T().cat[c])}</span><small>${n}</small></button>`;
   }).join("");
 }
-
 function stepper(id, q, where){
   const name = id.startsWith("c-") ? (cart.custom.find(c => c.id === id)||{}).name : pname(BY_ID[id]);
   return `<span class="stepper">
@@ -238,21 +326,20 @@ function stepper(id, q, where){
     <button type="button" data-act="inc" data-id="${id}" data-key="inc:${id}:${where}" aria-label="${esc(T().inc(name))}">+</button>
   </span>`;
 }
-
 function renderGrid(){
   const list = PRODUCTS.filter(p => inCat(p, cat) && matches(p));
   $("#result-count").textContent = T().results(list.length);
   $("#grid").innerHTML = list.map(p => {
     const q = cart.items[p.id];
+    const sub = [pnote(p), unitText(p.unit)].filter(Boolean).join(" · ");
     const tags = p.tags.map(t => `<span class="tagsm ${t}">${T().tag[t]}</span>`).join("");
     return `<article class="card${q ? " in" : ""}" data-card="${p.id}">
       <div class="card-name">${esc(pname(p))}</div>
-      ${pnote(p) ? `<div class="card-sub">${esc(pnote(p))}</div>` : ""}
-      ${tags ? `<div class="card-tags">${tags}</div>` : ""}
+      <div class="card-sub">${esc(sub)}</div>
       <div class="card-foot">
-        <span class="card-unit">${esc(unitText(p.unit))}</span>
+        <div class="card-tags">${tags}</div>
         ${q ? stepper(p.id, q, "grid")
-            : `<button type="button" class="add" data-act="add" data-id="${p.id}" data-key="add:${p.id}:grid" aria-label="${esc(T().add(pname(p)))}">+</button>`}
+            : `<button type="button" class="add" data-act="add" data-id="${p.id}" data-key="add:${p.id}:grid" aria-label="${esc(T().add(pname(p)))}">${PLUS}<span>${esc(T().addLabel)}</span></button>`}
       </div>
     </article>`;
   }).join("");
@@ -261,15 +348,13 @@ function renderGrid(){
   if (empty) $("#add-custom").textContent = T().addCustom(query.trim());
 }
 
-/* ================= 6. Cart rendering ================= */
+/* ================= 7. Order list ================= */
 function lines(){
   const out = Object.entries(cart.items).filter(([id]) => BY_ID[id]).map(([id,q]) => ({id, q, name:pname(BY_ID[id]), unit:BY_ID[id].unit}));
   cart.custom.forEach(c => out.push({id:c.id, q:c.qty, name:c.name, unit:"custom"}));
   return out;
 }
-function lineHtml(l, where){
-  return `<li class="line"><span class="line-name">${esc(l.name)}<span class="line-unit">${esc(l.unit === "custom" ? T().customNote : qtyLabel(l.unit, l.q))}</span></span>${stepper(l.id, l.q, where)}</li>`;
-}
+const lineHtml = (l, where) => `<li class="line"><span class="line-name">${esc(l.name)}<span class="line-unit">${esc(qtyLabel(l.unit, l.q))}</span></span>${stepper(l.id, l.q, where)}</li>`;
 function renderCart(){
   const ls = lines(), n = ls.length;
   $("#cart-list").innerHTML = ls.map(l => lineHtml(l, "cart")).join("");
@@ -283,27 +368,26 @@ function renderCart(){
 }
 function renderAll(){
   const key = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.key : null;
-  renderChips(); renderGrid(); renderCart();
+  renderCats(); renderGrid(); renderCart();
   if (key){ // keep keyboard focus on the same control after re-render
-    const [act, id, where] = key.split(":");
+    const [, id, where] = key.split(":");
     const el = $(`[data-key="${key}"]`) || $(`[data-key="inc:${id}:${where}"]`) || $(`[data-key="add:${id}:grid"]`);
     if (el) el.focus({preventScroll:true});
   }
 }
-
-/* ================= 7. Cart actions ================= */
-function step(id){ return id.startsWith("c-") ? 1 : UNITS[BY_ID[id].unit][2]; }
+const step = id => id.startsWith("c-") ? 1 : UNITS[BY_ID[id].unit][2];
+const getQty = id => id.startsWith("c-") ? ((cart.custom.find(x => x.id === id)||{}).qty || 0) : (cart.items[id] || 0);
 function setQty(id, q){
   q = Math.max(0, Math.round(q * 2) / 2);
   if (id.startsWith("c-")){
     const c = cart.custom.find(x => x.id === id); if (!c) return;
     if (q <= 0) cart.custom = cart.custom.filter(x => x.id !== id); else c.qty = q;
-  } else {
+  } else if (BY_ID[id]) {
     if (q <= 0) delete cart.items[id]; else cart.items[id] = q;
   }
   save(); renderAll();
 }
-const getQty = id => id.startsWith("c-") ? (cart.custom.find(x => x.id === id)||{}).qty || 0 : cart.items[id] || 0;
+function addProduct(id){ setQty(id, 1); const plus = $(`[data-key="inc:${id}:grid"]`); if (plus) plus.focus({preventScroll:true}); }
 function addCustom(name){
   name = name.trim(); if (!name) return;
   const ex = cart.custom.find(c => norm(c.name) === norm(name));
@@ -315,49 +399,55 @@ document.addEventListener("click", e => {
   const b = e.target.closest("[data-act]");
   if (b){
     const id = b.dataset.id;
-    if (b.dataset.act === "add") setQty(id, BY_ID[id].unit === "kg" ? 1 : step(id));
+    if (b.dataset.act === "add") addProduct(id);
     if (b.dataset.act === "inc") setQty(id, getQty(id) + step(id));
     if (b.dataset.act === "dec") setQty(id, getQty(id) - step(id));
     return;
   }
-  const card = e.target.closest("[data-card]");   // tap anywhere on a product card to add it
-  if (card && !cart.items[card.dataset.card]) {
-    const id = card.dataset.card;
-    setQty(id, BY_ID[id].unit === "kg" ? 1 : 1);
-    const plus = $(`[data-key="inc:${id}:grid"]`); if (plus) plus.focus({preventScroll:true});
-  }
-  const chip = e.target.closest("[data-cat]");
-  if (chip){ cat = chip.dataset.cat; renderChips(); renderGrid(); }
+  const card = e.target.closest("[data-card]");          // tap anywhere on a product card to add it
+  if (card && !cart.items[card.dataset.card]) { addProduct(card.dataset.card); return; }
+  const c = e.target.closest("[data-cat]");
+  if (c){ cat = c.dataset.cat; renderCats(); renderGrid(); }
+  const m = e.target.closest("[data-month]");
+  if (m){ month = +m.dataset.month; renderSeason(); }
 });
-$("#search").addEventListener("input", e => { query = e.target.value; renderChips(); renderGrid(); });
+$("#search").addEventListener("input", e => { query = e.target.value; renderCats(); renderGrid(); });
 $("#add-custom").addEventListener("click", () => { addCustom(query); query = ""; $("#search").value = ""; renderAll(); });
 $("#custom-form").addEventListener("submit", e => { e.preventDefault(); const i = $("#custom-input"); addCustom(i.value); i.value = ""; i.focus(); });
 $("#cart-clear").addEventListener("click", () => { cart = { items:{}, custom:[] }; save(); renderAll(); });
 
-/* ================= 8. Order form ================= */
+/* ================= 8. Seasonal guide ================= */
+function renderSeason(){
+  const box = $("#months");
+  if (!box.children.length) box.innerHTML = MONTHS.en.map((_, i) => `<button type="button" data-month="${i}"></button>`).join("");
+  $$("button", box).forEach((b, i) => { b.textContent = MONTHS[lang][i]; b.setAttribute("aria-pressed", i === month); });
+  const li = (keys, dict) => keys.split(" ").map(k => `<li>${esc(dict[k][L()])}</li>`).join("");
+  $("#season-produce").innerHTML = li(SEASON[month].p, SP);
+  $("#season-sea").innerHTML = li(SEASON[month].s, SS);
+}
+
+/* ================= 9. Order form ================= */
 const form = $("#order-form");
 const errBox = $("#form-error");
 let lastMessage = "";
-
 function localISO(d){ const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0,10); }
 const tomorrow = () => { const d = new Date(); d.setDate(d.getDate() + 1); return localISO(d); };
 form.date.min = tomorrow();
-
 function fmtDate(iso){
   const [y,m,d] = iso.split("-").map(Number);
   return new Date(y, m-1, d).toLocaleDateString(lang === "el" ? "el-GR" : "en-GB", { weekday:"short", day:"numeric", month:"short", year:"numeric" });
 }
 function buildMessage(){
-  const L = T().msg, f = form.elements, opt = f.where.selectedOptions[0];
-  const out = [`*${L.h}*`, ""];
-  const add = (k, v) => { if (v && String(v).trim()) out.push(`${L[k]}: ${String(v).trim()}`); };
+  const M = T().msg, f = form.elements, opt = f.where.selectedOptions[0];
+  const out = [`*${M.h}*`, ""];
+  const add = (k, v) => { if (v && String(v).trim()) out.push(`${M[k]}: ${String(v).trim()}`); };
   add("name", f.name.value); add("phone", f.phone.value); add("vessel", f.vessel.value);
   add("where", opt && opt.value ? opt.textContent : ""); add("berth", f.berth.value);
   add("date", f.date.value ? `${fmtDate(f.date.value)} · ${f.time.selectedOptions[0].textContent}` : "");
   add("pax", f.pax.value);
   const ls = lines();
-  if (ls.length){ out.push("", `*${L.list}*`); ls.forEach(l => out.push(`• ${l.name} — ${l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q)}`)); }
-  if (f.notes.value.trim()) out.push("", `${L.notes}:`, f.notes.value.trim());
+  if (ls.length){ out.push("", `*${M.list}*`); ls.forEach(l => out.push(`• ${l.name} — ${l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q)}`)); }
+  if (f.notes.value.trim()) out.push("", `${M.notes}:`, f.notes.value.trim());
   return out.join("\n");
 }
 function validate(){
@@ -380,9 +470,9 @@ form.addEventListener("input", e => { if (e.target.classList.contains("invalid")
 form.addEventListener("submit", e => {
   e.preventDefault();
   if (!validate()) return;
-  const via = e.submitter && e.submitter.dataset.send || "wa";
+  const via = (e.submitter && e.submitter.dataset.send) || "wa";
   lastMessage = buildMessage();
-  if (via === "mail"){
+  if (via === "mail" && CONFIG.email){
     let body = lastMessage.replace(/\*/g, "");
     if (body.length > 1800){ copyText(body); body = body.slice(0, 1500) + "\n…\n" + T().mailCut; }
     location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(T().msg.h + " · " + form.vessel.value)}&body=${encodeURIComponent(body)}`;
@@ -398,17 +488,19 @@ function copyText(t){
 }
 $("#copy-msg").addEventListener("click", e => { copyText(lastMessage.replace(/\*/g, "")); e.currentTarget.textContent = T().copied; });
 
-/* ================= 9. Contact links ================= */
+/* ================= 10. Contact links ================= */
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}` + (text ? `?text=${encodeURIComponent(text)}` : "");
 function updateLinks(){
   $$("[data-wa]").forEach(a => {
-    a.href = waLink(a.dataset.wa === "hello" ? T().hello : ""); a.target = "_blank"; a.rel = "noopener";
+    const k = a.dataset.wa; a.href = waLink(k === "hello" ? T().hello : k === "prices" ? T().prices : "");
+    a.target = "_blank"; a.rel = "noopener";
   });
+  $$("[data-if-email]").forEach(el => el.hidden = !CONFIG.email);
   $$("[data-mail]").forEach(a => a.href = `mailto:${CONFIG.email}`);
   $$("[data-cfg]").forEach(el => el.textContent = CONFIG[el.dataset.cfg]);
 }
 
-/* ================= 10. Language ================= */
+/* ================= 11. Language ================= */
 function setLang(next){
   lang = next === "el" ? "el" : "en";
   document.documentElement.lang = lang;
@@ -418,12 +510,12 @@ function setLang(next){
   $$(".lang button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === lang));
   document.title = T().title;
   $('meta[name="description"]').setAttribute("content", T().desc);
-  updateLinks(); renderAll();
+  updateLinks(); renderAll(); renderSeason();
   try { localStorage.setItem("lang", lang); } catch(e){}
 }
 $$(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
 
-/* ================= 11. Header, menu, mobile bar ================= */
+/* ================= 12. Header, menu, mobile bar ================= */
 const header = $(".site-header"), nav = $("#nav"), toggle = $(".menu-toggle"), bar = $("#cart-bar");
 const mq = window.matchMedia("(max-width:1024px)");
 function setMenu(open){
@@ -442,15 +534,12 @@ function updateBar(){
   bar.classList.toggle("show", show);
   bar.inert = !show;
 }
-new IntersectionObserver(es => es.forEach(en => {
-  if (en.target.id === "order") orderVisible = en.isIntersecting; else footerVisible = en.isIntersecting;
-  updateBar();
-})).observe($("#order"));
+new IntersectionObserver(es => es.forEach(en => { orderVisible = en.isIntersecting; updateBar(); })).observe($("#order"));
 new IntersectionObserver(es => es.forEach(en => { footerVisible = en.isIntersecting; updateBar(); })).observe($(".footer"));
 const onScroll = () => { header.classList.toggle("scrolled", scrollY > 30); pastHero = scrollY > innerHeight * .6; updateBar(); };
 addEventListener("scroll", onScroll, { passive:true });
 
-/* ================= 12. Init ================= */
+/* ================= 13. Init ================= */
 $$("[data-i18n]").forEach(el => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.innerHTML; });
 $$("[data-i18n-ph]").forEach(el => EN["ph:" + el.dataset.i18nPh] = el.placeholder);
 $$("[data-i18n-aria]").forEach(el => EN["aria:" + el.dataset.i18nAria] = el.getAttribute("aria-label"));
