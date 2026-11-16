@@ -154,13 +154,68 @@
       </div>
       <p class="head-note" data-i18n="how.note">No account needed.</p>
     </div>
-    <div class="steps-line" aria-hidden="true"><span></span></div>
-    <ol class="steps">
-      <li><span class="n">1</span><h3 data-i18n="how.1t">Choose</h3><p data-i18n="how.1p">Add products below, or send your list on WhatsApp as text, a photo or a file.</p><span class="step-time" data-i18n="how.1s">2 minutes</span></li>
-      <li><span class="n">2</span><h3 data-i18n="how.2t">Get your quote</h3><p data-i18n="how.2p">Every line shows origin, quantity and price. Out of season? We suggest an alternative.</p><span class="step-time" data-i18n="how.2s">Within 2 hours</span></li>
-      <li><span class="n">3</span><h3 data-i18n="how.3t">Approve &amp; pay</h3><p data-i18n="how.3p">Pay by card link or bank transfer. You get a confirmation with your delivery slot.</p><span class="step-time" data-i18n="how.3s">By 14:00 for next day</span></li>
-      <li><span class="n">4</span><h3 data-i18n="how.4t">Delivered &amp; checked</h3><p data-i18n="how.4p">Packed by category, chilled and frozen apart. We check it with you on the spot.</p><span class="step-time" data-i18n="how.4s">Invoice the same day</span></li>
-    </ol>
+    <div class="how" id="how-player" style="--dur:5200ms">
+      <ol class="how-steps">
+        <li class="how-step active" data-s="0"><button type="button"><span class="n">1</span><span class="how-t"><b data-i18n="how.1t">Choose</b><small data-i18n="how.1s">2 minutes</small></span></button>
+          <p data-i18n="how.1p">Add products below, or send your list on WhatsApp as text, a photo or a file.</p><span class="how-bar"><i></i></span></li>
+        <li class="how-step" data-s="1"><button type="button"><span class="n">2</span><span class="how-t"><b data-i18n="how.2t">Get your quote</b><small data-i18n="how.2s">Within 2 hours</small></span></button>
+          <p data-i18n="how.2p">Every line shows origin, quantity and price. Out of season? We suggest an alternative.</p><span class="how-bar"><i></i></span></li>
+        <li class="how-step" data-s="2"><button type="button"><span class="n">3</span><span class="how-t"><b data-i18n="how.3t">Approve &amp; pay</b><small data-i18n="how.3s">By 14:00 for next day</small></span></button>
+          <p data-i18n="how.3p">Pay by card link or bank transfer. You get a confirmation with your delivery slot.</p><span class="how-bar"><i></i></span></li>
+        <li class="how-step" data-s="3"><button type="button"><span class="n">4</span><span class="how-t"><b data-i18n="how.4t">Delivered &amp; checked</b><small data-i18n="how.4s">Invoice the same day</small></span></button>
+          <p data-i18n="how.4p">Packed by category, chilled and frozen apart. We check it with you on the spot.</p><span class="how-bar"><i></i></span></li>
+      </ol>
+
+      <div class="how-stage" aria-live="polite">
+        <span class="how-count"><b id="how-num">1</b> / 4</span>
+        <button type="button" class="how-play" id="how-play" aria-label="Pause"><svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6v12M15 6v12" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg><svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5Z" fill="currentColor"/></svg></button>
+
+        <!-- 1 choose -->
+        <div class="how-screen on" data-s="0">
+          <div class="mock">
+            <div class="mock-h"><b data-i18n="nav.order">My order</b><span class="mock-badge st" style="--d:3">3</span></div>
+            <div class="mock-row st" style="--d:0"><span class="mi">🍅</span><span data-i18n="hs.p1">Tomatoes</span><span class="mq">2 kg</span></div>
+            <div class="mock-row st" style="--d:1"><span class="mi">🧀</span><span data-i18n="hs.p2">Feta PDO</span><span class="mq">1.5 kg</span></div>
+            <div class="mock-row st" style="--d:2"><span class="mi">🐟</span><span data-i18n="hs.p3">Sea bream</span><span class="mq">3 kg</span></div>
+            <div class="mock-alt st" style="--d:4"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Z"/></svg><span data-i18n="hs.photo">or send a photo of your list</span></div>
+          </div>
+        </div>
+
+        <!-- 2 quote -->
+        <div class="how-screen" data-s="1">
+          <div class="mock">
+            <div class="mock-h"><b data-i18n="hs.q">Your quote</b><span class="mock-chip st" style="--d:5" data-i18n="hs.ready">Ready in 1 h 20 min</span></div>
+            <div class="mock-line st" style="--d:0"><span data-i18n="hs.p1">Tomatoes</span><span>2 kg</span><b>€ 7.00</b></div>
+            <div class="mock-line st" style="--d:1"><span data-i18n="hs.p2">Feta PDO</span><span>1.5 kg</span><b>€ 25.50</b></div>
+            <div class="mock-line st" style="--d:2"><span data-i18n="hs.p3">Sea bream</span><span>3 kg</span><b>€ 54.00</b></div>
+            <div class="mock-line st" style="--d:3"><span data-i18n="hs.del">Chilled delivery</span><span></span><b>€ 25.00</b></div>
+            <div class="mock-total st" style="--d:4"><span data-i18n="hs.total">Total, VAT incl.</span><b>€ 111.50</b></div>
+          </div>
+        </div>
+
+        <!-- 3 pay -->
+        <div class="how-screen" data-s="2">
+          <div class="mock mock-pay">
+            <div class="mock-h"><b data-i18n="hs.link">Payment link</b><span class="mock-amt">€ 111.50</span></div>
+            <div class="pay-card st" style="--d:0"><span class="pc-chip"></span><span>•••• 4821</span></div>
+            <div class="pay-btn st" style="--d:1"><span class="pb-a" data-i18n="hs.pay">Pay securely</span><span class="pb-b">✓ <span data-i18n="hs.paid">Paid</span></span></div>
+            <div class="mock-confirm st" style="--d:5"><span class="ok">✓</span><span data-i18n="hs.slot">Delivery confirmed · Thu 10:00–11:00</span></div>
+          </div>
+        </div>
+
+        <!-- 4 delivered -->
+        <div class="how-screen" data-s="3">
+          <div class="mock">
+            <div class="mock-route st" style="--d:0"><span class="rt-dot"></span><span class="rt-line"><i></i></span><span class="rt-boat">⚓</span></div>
+            <div class="mock-check st" style="--d:1"><span class="ok">✓</span><span data-i18n="hs.c1">Packed by category</span></div>
+            <div class="mock-check st" style="--d:2"><span class="ok">✓</span><span data-i18n="hs.c2">Chilled 0–4 °C · frozen −18 °C</span></div>
+            <div class="mock-check st" style="--d:3"><span class="ok">✓</span><span data-i18n="hs.c3">Checked with you on the spot</span></div>
+            <div class="mock-check st" style="--d:4"><span class="ok">✓</span><span data-i18n="hs.c4">Invoice sent</span></div>
+            <p class="mock-foot st" style="--d:5" data-i18n="hs.arrived">Delivered to M/Y Aurora · Mykonos</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -361,7 +416,7 @@
 </section>
 
 <!-- ================= ORDER: 4-step inquiry ================= -->
-<section class="section section-dark" id="order">
+<section class="section section-yellow" id="order">
   <div class="container order">
     <aside class="order-intro">
       <p class="eyebrow"><span data-i18n="or.eyebrow">Your inquiry</span></p>

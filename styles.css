@@ -680,3 +680,129 @@ html[lang="el"] h1{font-size:clamp(2.1rem,4.2vw,3.6rem)}
   .send-row .btn,.send-row .btn-wa{flex:1 1 100%;min-width:0}
   .done-actions .btn{flex:1 1 100%}
 }
+
+/* ================= How it works: auto-playing walkthrough ================= */
+.how{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:48px;align-items:center}
+.how-steps{display:grid;gap:10px}
+.how-step{position:relative;border-radius:var(--r-md);background:#fff;border:1.5px solid var(--line);overflow:hidden;transition:border-color .35s,box-shadow .35s}
+.how-step button{display:flex;align-items:center;gap:16px;width:100%;padding:18px 20px;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer}
+.how-step .n{flex:none;width:42px;height:42px;border-radius:50%;background:var(--grey);display:grid;place-items:center;font-weight:800;transition:background-color .35s,transform .35s var(--ease)}
+.how-t{flex:1;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.how-t b{font-size:17px;font-weight:700}
+.how-t small{font-size:13px;font-weight:800;color:var(--orange-text)}
+.how-step p{max-height:0;opacity:0;padding:0 20px 0 78px;color:var(--muted);font-size:15px;transition:max-height .5s var(--ease),opacity .35s,padding .4s var(--ease)}
+.how-step.active{border-color:var(--yellow);box-shadow:var(--shadow)}
+.how-step.active .n{background:var(--yellow);transform:scale(1.06)}
+.how-step.active p{max-height:140px;opacity:1;padding-bottom:18px}
+.how-step.seen:not(.active) .n{background:var(--yellow-soft)}
+.how-step:not(.active) button:hover .n{background:var(--yellow-soft)}
+.how-bar{position:absolute;left:0;right:0;bottom:0;height:3px}
+.how-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--orange))}
+.how-step.active .how-bar i{animation:fillbar var(--dur) linear forwards}
+.how.paused .how-step.active .how-bar i{animation-play-state:paused}
+.how.static .how-bar{display:none}
+@keyframes fillbar{to{width:100%}}
+
+.how-stage{position:relative;min-height:440px;border-radius:24px;background:var(--brown);overflow:hidden;display:grid;place-items:center;padding:56px 32px}
+.how-stage::before{content:"";position:absolute;right:-90px;bottom:-90px;width:300px;height:300px;background:url("assets/ico-sun-yellow.png") center/contain no-repeat;opacity:.07;animation:spin 50s linear infinite}
+.how-stage::after{content:"";position:absolute;left:-40px;top:-40px;width:160px;height:160px;background:url("assets/ico-waves-yellow.png") center/contain no-repeat;opacity:.06}
+.how-count{position:absolute;left:22px;top:18px;font-size:13px;font-weight:800;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums}
+.how-count b{color:var(--yellow)}
+.how-play{position:absolute;right:16px;top:12px;z-index:2;width:38px;height:38px;border-radius:50%;border:1.5px solid rgba(255,255,255,.25);background:none;color:#fff;display:grid;place-items:center;cursor:pointer;transition:background-color .2s}
+.how-play:hover{background:rgba(255,255,255,.1)}
+.how-play svg{width:16px;height:16px}
+.how-play .i-play,.how.paused .how-play .i-pause{display:none}
+.how.paused .how-play .i-play{display:block}
+.how.static .how-play{display:none}
+.how-screen{position:absolute;inset:56px 28px 32px;display:grid;place-items:center;opacity:0;transform:translateY(18px) scale(.97);transition:opacity .45s,transform .6s var(--ease);pointer-events:none}
+.how-screen.on{opacity:1;transform:none;pointer-events:auto}
+.how-screen .st{opacity:0;transform:translateY(10px);transition:opacity .45s,transform .45s var(--ease)}
+.how-screen.on .st{opacity:1;transform:none;transition-delay:calc(var(--d,0) * 230ms + 250ms)}
+.how.static .how-screen .st{opacity:1;transform:none}
+
+.mock{width:min(400px,100%);padding:20px;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 30px 60px -30px rgba(0,0,0,.7);display:grid;gap:4px}
+.mock-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:4px;border-bottom:1px dashed var(--line-2)}
+.mock-h b{font-size:16px}
+.mock-badge{min-width:26px;height:26px;border-radius:var(--pill);background:var(--yellow);display:grid;place-items:center;font-weight:800;font-size:13px}
+.mock-chip{padding:5px 10px;border-radius:var(--pill);background:var(--yellow-soft);font-size:12px;font-weight:800;color:#6b4300}
+.mock-row{display:grid;grid-template-columns:34px 1fr auto;align-items:center;gap:12px;padding:9px 10px;border-radius:12px;background:#fffaf0;border:1.5px solid var(--yellow);margin-top:6px}
+.mi{width:34px;height:34px;border-radius:10px;background:var(--yellow);display:grid;place-items:center;font-size:17px}
+.mq{font-weight:800;font-size:14px}
+.mock-alt{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:13px;font-weight:700;color:var(--muted)}
+.mock-alt svg{width:16px;height:16px;color:#25a244}
+.mock-line{display:grid;grid-template-columns:1fr auto 72px;gap:10px;padding:8px 0;border-bottom:1px solid #f0ebe1;font-size:14px}
+.mock-line span:nth-child(2){color:var(--muted)}
+.mock-line b{text-align:right;font-variant-numeric:tabular-nums}
+.mock-total{display:flex;justify-content:space-between;align-items:baseline;padding-top:12px;font-size:14px}
+.mock-total b{font-size:1.35rem}
+.mock-amt{font-size:1.35rem;font-weight:800}
+.pay-card{display:flex;justify-content:space-between;align-items:center;margin:8px 0;padding:16px;height:96px;align-items:flex-end;border-radius:14px;background:linear-gradient(135deg,var(--brown),#5a463f);color:#fff;font-weight:700;letter-spacing:.12em}
+.pc-chip{width:34px;height:24px;border-radius:5px;background:linear-gradient(135deg,var(--yellow),#e2a520);align-self:flex-start}
+.pay-btn{position:relative;height:50px;border-radius:var(--pill);background:var(--orange-ink);color:#fff;font-weight:800;display:grid;place-items:center;overflow:hidden}
+.pay-btn span{grid-area:1/1}
+.pb-b{opacity:0}
+.how-screen.on .pay-btn{animation:paid .5s 1.7s forwards}
+.how-screen.on .pb-a{animation:fadeout .3s 1.7s forwards}
+.how-screen.on .pb-b{animation:fadein .3s 1.9s forwards}
+@keyframes paid{to{background:#2f8a4f}}
+@keyframes fadeout{to{opacity:0;transform:translateY(-8px)}}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.mock-confirm,.mock-check{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
+.mock-confirm{margin-top:10px;padding:12px;border-radius:12px;background:#eaf6ee;color:#1f5f35}
+.ok{flex:none;width:24px;height:24px;border-radius:50%;background:#2f8a4f;color:#fff;display:grid;place-items:center;font-size:13px;font-weight:800}
+.mock-check{padding:9px 0;border-bottom:1px solid #f0ebe1}
+.mock-route{display:flex;align-items:center;gap:10px;margin-bottom:6px;padding:10px 4px 14px;border-bottom:1px dashed var(--line-2)}
+.rt-dot{width:12px;height:12px;border-radius:50%;background:var(--yellow);flex:none}
+.rt-line{flex:1;height:3px;border-radius:3px;background:var(--grey);overflow:hidden}
+.rt-line i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--yellow),var(--orange))}
+.how-screen.on .rt-line i{animation:fillbar 1.4s .4s var(--ease) forwards}
+.rt-boat{font-size:20px}
+.mock-foot{margin-top:10px;font-size:13px;font-weight:700;color:var(--orange-text);text-align:center}
+
+@media (max-width:1024px){
+  .how{grid-template-columns:minmax(0,1fr);gap:20px}
+  .how-stage{order:-1;min-height:400px}
+}
+@media (max-width:720px){
+  .how-stage{min-height:380px;padding:52px 16px 20px;border-radius:20px}
+  .how-screen{inset:48px 14px 18px}
+  .mock{padding:16px}
+  .how-step button{padding:14px 16px;gap:12px}
+  .how-step .n{width:36px;height:36px}
+  .how-step p{padding-left:64px;padding-right:16px}
+  .how-t b{font-size:15.5px}
+}
+
+/* ================= Inquiry on brand yellow (no dark brown) ================= */
+.section-yellow{background:var(--yellow);color:var(--brown)}
+#order .eyebrow{color:var(--brown)}
+#order .eyebrow::before{background-image:url("assets/ico-bowls-brown.png")}
+#order .muted{color:rgba(41,31,29,.82)}
+#order :focus-visible{outline-color:var(--brown)}
+#order .contact-list li{border-bottom-color:rgba(41,31,29,.15)}
+#order .contact-list li>span:first-child{color:rgba(41,31,29,.65)}
+#order .contact-list a{color:var(--brown);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:1.5px}
+#order .wiz-nav button{color:rgba(41,31,29,.7)}
+#order .wiz-nav button:hover{background:rgba(255,255,255,.35);color:var(--brown)}
+#order .wiz-nav small{color:rgba(41,31,29,.62)}
+#order .wn{background:var(--yellow);border-color:rgba(41,31,29,.35);color:var(--brown)}
+#order .wiz-nav li.current button{background:rgba(255,255,255,.6);border-color:var(--brown);color:var(--brown)}
+#order .wiz-nav li.current .wn{background:var(--brown);border-color:var(--brown);color:var(--yellow)}
+#order .wiz-nav li.done button{color:var(--brown)}
+#order .wiz-nav li.done .wn{background:var(--brown);border-color:var(--brown);color:var(--yellow)}
+#order .wiz-nav li:not(:last-child)::after{background:rgba(41,31,29,.2)}
+#order .wiz-nav li.done:not(:last-child)::after{background:var(--brown)}
+#order .wizard{box-shadow:0 40px 80px -40px rgba(41,31,29,.45)}
+
+/* walkthrough panel on yellow too */
+.how-stage{background:var(--yellow)}
+.how-stage::before{background-image:url("assets/ico-sun-orange.png");opacity:.12}
+.how-stage::after{background-image:url("assets/ico-waves-brown.png");opacity:.1}
+.how-count{color:rgba(41,31,29,.6)}
+.how-count b{color:var(--brown)}
+.how-play{border-color:rgba(41,31,29,.3);color:var(--brown)}
+.how-play:hover{background:rgba(255,255,255,.4)}
+.mock{box-shadow:0 30px 60px -30px rgba(41,31,29,.55)}
+.pay-card{background:linear-gradient(135deg,var(--orange-ink),var(--orange))}
+.pc-chip{background:linear-gradient(135deg,#fff3d6,#f2d38a)}
+.row-dt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.quick-dates{flex-wrap:nowrap}.quick-dates button{padding:0 10px;white-space:nowrap}@media (max-width:720px){.row-dt{grid-template-columns:minmax(0,1fr)}}

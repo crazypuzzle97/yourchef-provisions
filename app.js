@@ -154,6 +154,7 @@ const UI = {
     noteOther:"Other areas need 48–72 hours. We’ll confirm the earliest date.",
     doneWa:"Your inquiry is ready in WhatsApp", doneMail:"Your inquiry is ready in your email",
     donePWa:"Press <b>send</b> in WhatsApp to deliver it to us.", donePMail:"Press <b>send</b> in your email app to deliver it to us.",
+    play:"Play", pause:"Pause",
     sentNav:"Sent", forL:"Inquiry for", ref:"Ref", noList:"Written list only",
     title:"Your Chef Provisions · Yacht & villa provisioning in Greece",
     desc:"Fresh provisions for yachts and villas in the Greek islands. Choose products, get an itemised quote within 2 hours, next-day delivery."
@@ -176,6 +177,7 @@ const UI = {
     noteOther:"Για άλλες περιοχές χρειάζονται 48–72 ώρες. Θα σας επιβεβαιώσουμε την πρώτη διαθέσιμη ημερομηνία.",
     doneWa:"Το αίτημά σας είναι έτοιμο στο WhatsApp", doneMail:"Το αίτημά σας είναι έτοιμο στο email σας",
     donePWa:"Πατήστε <b>αποστολή</b> στο WhatsApp για να μας το στείλετε.", donePMail:"Πατήστε <b>αποστολή</b> στην εφαρμογή email για να μας το στείλετε.",
+    play:"Αναπαραγωγή", pause:"Παύση",
     sentNav:"Εστάλη", forL:"Αίτημα για", ref:"Κωδ.", noList:"Μόνο γραπτή λίστα",
     title:"Your Chef Provisions · Τροφοδοσία σκαφών & βιλών στην Ελλάδα",
     desc:"Φρέσκα τρόφιμα για σκάφη και βίλες στα ελληνικά νησιά. Επιλέξτε προϊόντα, λάβετε αναλυτική προσφορά σε 2 ώρες, παράδοση την επόμενη μέρα."
@@ -216,6 +218,11 @@ const EL = {
   "how.4t":"Παράδοση &amp; έλεγχος","how.4p":"Συσκευασία ανά κατηγορία, ψυχόμενα και κατεψυγμένα χωριστά. Τα ελέγχουμε μαζί σας επί τόπου.","how.4s":"Τιμολόγιο αυθημερόν",
 
   "flow.1":"Ξεκινήστε εδώ",
+  "hs.p1":"Ντομάτες","hs.p2":"Φέτα ΠΟΠ","hs.p3":"Τσιπούρα","hs.photo":"ή στείλτε φωτογραφία της λίστας",
+  "hs.q":"Η προσφορά σας","hs.ready":"Έτοιμη σε 1 ώρα 20΄","hs.del":"Παράδοση με ψύξη","hs.total":"Σύνολο με ΦΠΑ",
+  "hs.link":"Σύνδεσμος πληρωμής","hs.pay":"Ασφαλής πληρωμή","hs.paid":"Πληρώθηκε","hs.slot":"Επιβεβαίωση παράδοσης · Πέμ 10:00–11:00",
+  "hs.c1":"Συσκευασία ανά κατηγορία","hs.c2":"Ψύξη 0–4 °C · κατάψυξη −18 °C","hs.c3":"Έλεγχος μαζί σας επί τόπου","hs.c4":"Το τιμολόγιο εστάλη",
+  "hs.arrived":"Παραδόθηκε στο M/Y Aurora · Μύκονος",
   "pr.eyebrow":"Προϊόντα","pr.title":"Επιλέξτε ό,τι χρειάζεστε",
   "pr.note":"Οι τιμές της αγοράς αλλάζουν καθημερινά, γι’ αυτό κάθε είδος τιμολογείται στην προσφορά σας. Διαθέσιμα σε ποιότητα guest και crew.",
   "pr.search":"Αναζήτηση προϊόντων","pr.empty":"Δεν το βρίσκετε; Μπορούμε να το αναζητήσουμε για εσάς.",
@@ -768,7 +775,7 @@ addEventListener("scroll", onScroll, { passive:true });
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 if (!reduce){
   document.documentElement.classList.add("motion");
-  const groups = [".head", ".why-grid > *", ".steps > li", ".pantry > li", ".season", ".regions > *", ".logistics > *",
+  const groups = [".head", ".why-grid > *", ".how-step", ".how-stage", ".pantry > li", ".season", ".regions > *", ".logistics > *",
                   ".scope-col", ".terms > div", ".dates > li", ".pricing-intro", ".order-intro", ".form", ".faq details", ".footer-panel"];
   const io = new IntersectionObserver(es => es.forEach(en => {
     if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
@@ -780,14 +787,38 @@ if (!reduce){
     m1.style.translate = `0 ${scrollY * .06}px`; m2.style.translate = `0 ${scrollY * -.05}px`;
   }, { passive:true });
 }
-const how = $("#how"), stepsLine = $(".steps-line"), stepEls = $$(".steps > li");   // progress line in "How it works"
-function stepsProgress(){
-  const r = how.getBoundingClientRect(), vh = innerHeight;
-  const p = Math.min(1, Math.max(0, (vh * .75 - r.top) / (r.height * .7)));
-  stepsLine.style.setProperty("--p", p.toFixed(3));
-  stepEls.forEach((el, i) => el.classList.toggle("on", p >= (i + .5) / stepEls.length));
+// "How it works": auto-playing walkthrough (advances when each progress bar fills)
+const howEl = $("#how-player"), howSteps = $$(".how-step", howEl), howScreens = $$(".how-screen", howEl), howPlay = $("#how-play");
+let howIdx = 0, howUserPaused = false, howInView = false, howHover = false;
+const howStatic = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (howStatic) howEl.classList.add("static");
+function howShow(i){
+  howIdx = (i + howSteps.length) % howSteps.length;
+  howSteps.forEach((li, n) => {
+    li.classList.toggle("active", n === howIdx);
+    if (n === howIdx) li.classList.add("seen");
+    const bar = $(".how-bar i", li); bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = "";
+  });
+  howScreens.forEach((sc, n) => {
+    if (n === howIdx){ sc.classList.remove("on"); void sc.offsetWidth; sc.classList.add("on"); } else sc.classList.remove("on");
+  });
+  $("#how-num").textContent = howIdx + 1;
 }
-addEventListener("scroll", stepsProgress, { passive:true }); stepsProgress();
+function howSync(){
+  const paused = howUserPaused || !howInView || howHover;
+  howEl.classList.toggle("paused", paused);
+  howPlay.setAttribute("aria-label", howUserPaused ? T().play : T().pause);
+}
+howSteps.forEach((li, n) => {
+  $(".how-bar i", li).addEventListener("animationend", () => { if (!howStatic) howShow(n + 1); });
+  $("button", li).addEventListener("click", () => howShow(n));
+});
+howPlay.addEventListener("click", () => { howUserPaused = !howUserPaused; howSync(); });
+howEl.addEventListener("pointerenter", e => { if (e.pointerType === "mouse"){ howHover = true; howSync(); } });
+howEl.addEventListener("pointerleave", () => { howHover = false; howSync(); });
+new IntersectionObserver(es => es.forEach(en => { howInView = en.isIntersecting; howSync(); }), { threshold:.35 }).observe(howEl);
+howShow(0); howSync();
+
 const navLinks = $$(".nav a");   // highlight the nav link of the section in view
 const secIO = new IntersectionObserver(es => es.forEach(en => {
   if (en.isIntersecting) navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
