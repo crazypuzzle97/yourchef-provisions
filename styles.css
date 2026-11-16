@@ -806,3 +806,44 @@ html[lang="el"] h1{font-size:clamp(2.1rem,4.2vw,3.6rem)}
 .pay-card{background:linear-gradient(135deg,var(--orange-ink),var(--orange))}
 .pc-chip{background:linear-gradient(135deg,#fff3d6,#f2d38a)}
 .row-dt{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.quick-dates{flex-wrap:nowrap}.quick-dates button{padding:0 10px;white-space:nowrap}@media (max-width:720px){.row-dt{grid-template-columns:minmax(0,1fr)}}
+
+/* ================= No large brown areas ================= */
+/* Greek pantry on cream */
+.section-cream{background:var(--beige);color:var(--ink)}
+#greek .eyebrow{color:var(--orange-text)}
+#greek .eyebrow::before{background-image:url("assets/ico-olive-orange.png")}
+#greek .head-note{color:var(--muted)}
+.marquee-big span{-webkit-text-stroke:1px rgba(198,74,38,.32)}
+.marquee-big img{opacity:.45}
+.pantry li{background:#fff;border-color:var(--line);color:var(--ink)}
+.pantry li:hover{background:#fff;border-color:var(--yellow);box-shadow:var(--shadow)}
+.pantry span{color:var(--muted)}
+.season{background:#fff;border-color:var(--line);color:var(--ink);box-shadow:0 30px 60px -45px rgba(41,31,29,.35)}
+.season-kicker{color:var(--muted)}
+.season-month h3{color:var(--orange-text)}
+.season-arrow{border-color:var(--line-2);color:var(--brown)}
+.season-arrow:hover{background:var(--yellow);border-color:var(--yellow);color:var(--brown)}
+.months{background:var(--grey)}
+.months button{color:var(--muted)}
+.months button:hover{color:var(--ink);background:#fff}
+.months button[aria-pressed="true"]{background:var(--yellow);color:var(--brown)}
+.season-p{color:rgba(35,27,25,.82)}
+.season-note{color:var(--muted);border-top-color:var(--line)}
+.season-note::before{border-color:var(--line-2)}
+.season-col h4{color:var(--orange-text);border-bottom-color:rgba(198,74,38,.3)}
+.season-col li{border-bottom-color:var(--line)}
+.dots i,.season-legend i{background:rgba(41,31,29,.12)}
+.dots i.on,.season-legend i.on{background:var(--yellow);box-shadow:inset 0 0 0 1px rgba(169,100,0,.25)}
+.dots i.cur,.season-legend i.cur{box-shadow:0 0 0 2px #fff,0 0 0 3.5px var(--brown)}
+.season-legend{color:var(--muted)}
+/* ticker on brand orange */
+.marquee:not(.marquee-big){background:var(--orange-ink);color:#fff6e6;border:0}
+/* footer on cream */
+.footer-panel{background:var(--beige);color:var(--ink);border:1.5px solid var(--line)}
+.footer .brand{color:var(--brown)}
+.footer-brand p{color:var(--muted)}
+.foot-h{color:var(--orange-text)}
+.foot-list{color:rgba(35,27,25,.8)}
+.foot-list a:hover{color:var(--orange-text)}
+.footer :focus-visible{outline-color:var(--brown)}
+.marquee.marquee-big span{font-size:clamp(44px,7vw,104px);letter-spacing:-.02em}@media (max-width:720px){.marquee.marquee-big img{width:30px;height:30px}.marquee.marquee-big .marquee-track{gap:24px}}
