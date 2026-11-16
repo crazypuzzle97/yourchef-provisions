@@ -140,11 +140,12 @@ const UI = {
     addLabel:"Add", add:n => `Add ${n}`, inc:n => `More ${n}`, dec:n => `Less ${n}`,
     tag:{gr:"Greek",pdo:"PDO"}, customNote:"Special request",
     errRequired:"Please fill in the highlighted fields.",
-    errEmpty:"Add at least one product, or write what you need under “Anything else”.",
+    errEmpty:"Add at least one product, or write your list under “Anything else”.",
     errDate:"Choose a delivery date from tomorrow onwards.",
     copied:"Copied ✓", hello:"Hi! Here is my provisioning list:", prices:"Hi! Could you send this week’s prices for:",
     mailCut:"(List shortened for email. The full list is copied to your clipboard, paste it here.)",
-    msg:{h:"New order · Your Chef Provisions",name:"Name",phone:"Phone",vessel:"Yacht/villa",where:"Deliver to",berth:"Port/berth",date:"Date",pax:"Guests/crew",list:"ORDER",notes:"Anything else"},
+    msg:{h:"New inquiry · Your Chef Provisions",name:"Name",role:"Role",phone:"Phone",email:"Email",vessel:"Yacht/villa",where:"Island",date:"Date",type:"Delivery to",berth:"Port/berth",pax:"People",guests:"Guests",crew:"Crew",grade:"Quality",list:"ORDER",notes:"Anything else"},
+    items:n => `${n} ${n===1?"item":"items"}`, notesOnly:"Written list", edit:"Edit",
     title:"Your Chef Provisions · Yacht & villa provisioning in Greece",
     desc:"Fresh provisions for yachts and villas in the Greek islands. Choose products, get an itemised quote within 2 hours, next-day delivery."
   },
@@ -159,7 +160,8 @@ const UI = {
     errDate:"Επιλέξτε ημερομηνία παράδοσης από αύριο και μετά.",
     copied:"Αντιγράφηκε ✓", hello:"Γεια σας! Η λίστα τροφοδοσίας μου:", prices:"Γεια σας! Μπορείτε να μου στείλετε τις τιμές της εβδομάδας για:",
     mailCut:"(Η λίστα συντομεύτηκε για το email. Η πλήρης λίστα αντιγράφηκε, επικολλήστε την εδώ.)",
-    msg:{h:"Νέα παραγγελία · Your Chef Provisions",name:"Όνομα",phone:"Τηλέφωνο",vessel:"Σκάφος/βίλα",where:"Παράδοση σε",berth:"Λιμάνι/θέση",date:"Ημερομηνία",pax:"Φιλοξενούμενοι/πλήρωμα",list:"ΠΑΡΑΓΓΕΛΙΑ",notes:"Κάτι άλλο"},
+    msg:{h:"Νέο αίτημα · Your Chef Provisions",name:"Όνομα",role:"Ιδιότητα",phone:"Τηλέφωνο",email:"Email",vessel:"Σκάφος/βίλα",where:"Νησί",date:"Ημερομηνία",type:"Παράδοση σε",berth:"Λιμάνι/θέση",pax:"Άτομα",guests:"Φιλοξενούμενοι",crew:"Πλήρωμα",grade:"Ποιότητα",list:"ΠΑΡΑΓΓΕΛΙΑ",notes:"Κάτι άλλο"},
+    items:n => `${n} ${n===1?"είδος":"είδη"}`, notesOnly:"Γραπτή λίστα", edit:"Αλλαγή",
     title:"Your Chef Provisions · Τροφοδοσία σκαφών & βιλών στην Ελλάδα",
     desc:"Φρέσκα τρόφιμα για σκάφη και βίλες στα ελληνικά νησιά. Επιλέξτε προϊόντα, λάβετε αναλυτική προσφορά σε 2 ώρες, παράδοση την επόμενη μέρα."
   }
@@ -180,7 +182,7 @@ const EL = {
   "qc.label":"Δείγμα προσφοράς","qc.for":"M/Y Example · Μύκονος","qc.slot":"Πέμ · 10:00–11:00",
   "qc.l1":"Ντομάτες Κρήτης","qc.l2":"Φέτα ΠΟΠ, βαρελίσια","qc.l3":"Τσιπούρα, ολόκληρη","qc.l4":"Κοπανιστή ΠΟΠ",
   "qc.del":"Παράδοση με ψύξη στην προβλήτα","qc.total":"Σύνολο με ΦΠΑ","qc.caption":"Ενδεικτικό παράδειγμα · ενδεικτικές τιμές",
-  "f1.t":"2 ώρες","f1.p":"για την αναλυτική προσφορά, 08:00–22:00","f2.p":"τελευταία ώρα για παράδοση την επόμενη μέρα",
+  "f1.t":"2 ώρες","f1.p":"για την αναλυτική προσφορά, <span class=\"nw\">08:00–22:00</span>","f2.p":"τελευταία ώρα για παράδοση την επόμενη μέρα",
   "f3.p":"ψυχόμενα και κατεψυγμένα χωριστά, ως το ψυγείο σας","f4.p":"ένας συντονιστής, στα ελληνικά ή στα αγγλικά",
 
   "why.eyebrow":"Γιατί μας επιλέγουν οι σεφ","why.title":"Δουλεύουμε όπως η ομάδα ενός σεφ",
@@ -258,17 +260,26 @@ const EL = {
   "d6d":"15 Αυγ","d6":"Δεκαπενταύγουστος: αιχμή της σεζόν, γεμάτα πλοία, κλειστές αγορές. Παραγγείλτε έως τις 12 Αυγούστου.",
   "d7d":"28 Οκτ","d7":"Επέτειος του «Όχι»: αργία.",
 
-  "or.eyebrow":"Η παραγγελία μου","or.title":"Στοιχεία παράδοσης",
-  "or.lead":"Σας απαντάμε στο WhatsApp με αναλυτική προσφορά. Καμία χρέωση πριν την εγκρίνετε.",
-  "or.list":"Η λίστα σας","or.edit":"Αλλαγή λίστας",
-  "or.noitems":"Δεν έχετε επιλέξει προϊόντα. Γράψτε τι χρειάζεστε στο «Κάτι άλλο».",
+  "or.eyebrow":"Το αίτημά σας","or.title":"Στείλτε το αίτημά σας",
+  "or.lead":"Τέσσερα σύντομα βήματα. Σας απαντάμε στο WhatsApp με αναλυτική προσφορά. Καμία χρέωση πριν την εγκρίνετε.",
+  "or.noitems":"Δεν έχετε επιλέξει προϊόντα ακόμη. Δείτε τον κατάλογο ή γράψτε τη λίστα σας παρακάτω.",
   "or.wa":"WhatsApp","or.email":"Email","or.hours":"Ωράριο","or.hoursV":"Καθημερινά 08:00–22:00 τη σεζόν",
-  "fm.name":"Ονοματεπώνυμο","fm.phone":"Τηλέφωνο / WhatsApp","fm.vessel":"Σκάφος ή βίλα","fm.where":"Παράδοση σε",
-  "fm.choose":"Επιλέξτε…","fm.l1":"Μύκονος","fm.l2":"Πάρος","fm.l3":"Αντίπαρος","fm.l4":"Κέρκυρα","fm.l5":"Κρήτη","fm.other":"Άλλο (48–72 ώρες)",
-  "fm.date":"Ημερομηνία","fm.time":"Ώρα","fm.t1":"Πρωί (08–12)","fm.t2":"Μεσημέρι (12–16)","fm.t3":"Απόγευμα (16–20)","fm.t4":"Ευέλικτα",
-  "fm.pax":"Φιλοξενούμενοι / πλήρωμα","fm.berth":"Λιμάνι και θέση πρόσδεσης ή διεύθυνση βίλας",
-  "fm.notes":"Κάτι άλλο (είδη, αλλεργίες, μάρκες)","fm.sendWa":"Αποστολή στο WhatsApp","fm.sendMail":"Αποστολή με email",
-  "fm.sent":"Η παραγγελία σας είναι έτοιμη στο WhatsApp. Πατήστε αποστολή εκεί. Δεν άνοιξε;","fm.copy":"Αντιγραφή κειμένου",
+  "wz.s1":"Η λίστα σας","wz.s2":"Παράδοση","wz.s3":"Επικοινωνία","wz.s4":"Έλεγχος &amp; αποστολή",
+  "wz.s1h":"Ελέγξτε τις ποσότητες και προσθέστε ό,τι δεν υπάρχει στον κατάλογο.",
+  "wz.more":"+ Προσθήκη προϊόντων","wz.grade":"Ποιότητα","wz.g1":"Τραπέζι φιλοξενούμενων","wz.g2":"Mess πληρώματος","wz.g3":"Και τα δύο",
+  "fm.notes":"Κάτι άλλο (είδη, αλλεργίες, μάρκες)","wz.notesph":"π.χ. 2 κιλά καραβίδες, χωρίς ξηρούς καρπούς, καφές Illy",
+  "wz.s2h":"Πού και πότε να παραδώσουμε;","fm.where":"Νησί","wz.next":"Επόμενη μέρα",
+  "fm.l1":"Μύκονος","fm.l2":"Πάρος","fm.l3":"Αντίπαρος","fm.l4":"Κέρκυρα","fm.l5":"Κρήτη","fm.other":"Άλλο",
+  "fm.date":"Ημερομηνία","fm.time":"Ώρα","fm.t1":"08–12","fm.t2":"12–16","fm.t3":"16–20","fm.t4":"Ευέλικτα",
+  "wz.type":"Παράδοση σε","wz.ty1":"Θέση στη μαρίνα","wz.ty2":"Στην άγκυρα (tender)","wz.ty3":"Βίλα",
+  "fm.berth":"Λιμάνι και θέση πρόσδεσης ή διεύθυνση βίλας","wz.berthph":"π.χ. Νέο Λιμάνι Μυκόνου, θέση 12",
+  "wz.guests":"Φιλοξενούμενοι","wz.crew":"Πλήρωμα",
+  "wz.s3h":"Σε ποιον να στείλουμε την προσφορά;","fm.name":"Ονοματεπώνυμο","fm.phone":"Τηλέφωνο / WhatsApp",
+  "fm.vessel":"Όνομα σκάφους ή βίλας","wz.email":"Email (προαιρετικό)",
+  "wz.role":"Είστε","wz.r1":"Σεφ","wz.r2":"Καπετάνιος / purser","wz.r3":"Διαχειριστής βίλας","wz.r4":"Άλλο",
+  "wz.s4h":"Ελέγξτε τα στοιχεία και στείλτε. Το WhatsApp ανοίγει με το αίτημα έτοιμο.",
+  "fm.sent":"Το αίτημά σας είναι έτοιμο στο WhatsApp. Πατήστε αποστολή εκεί. Δεν άνοιξε;","fm.copy":"Αντιγραφή κειμένου",
+  "fm.sendWa":"Αποστολή στο WhatsApp","fm.sendMail":"Αποστολή με email","wz.back":"Πίσω","wz.nextBtn":"Συνέχεια",
 
   "faq.eyebrow":"Ερωτήσεις","faq.title":"Χρήσιμες πληροφορίες",
   "q1":"Πόσο νωρίτερα πρέπει να παραγγείλω;","a1":"Στα νησιά με παράδοση την επόμενη μέρα, παραγγείλτε έως τις 14:00. Για την αρχή ενός ναύλου, 3–5 μέρες νωρίτερα μας επιτρέπουν να βρούμε ειδικά προϊόντα και να ετοιμάσουμε κρέας και ψάρι σε μερίδες. Στην υπόλοιπη Ελλάδα, υπολογίστε 48–72 ώρες.",
@@ -326,23 +337,48 @@ function stepper(id, q, where){
     <button type="button" data-act="inc" data-id="${id}" data-key="inc:${id}:${where}" aria-label="${esc(T().inc(name))}">+</button>
   </span>`;
 }
+const ICONS = { // simple line icons per category
+  fv:'<path d="M12 21c-4.5 0-7-3.3-7-7.2C5 10 7.6 7.5 12 7.5S19 10 19 13.8C19 17.7 16.5 21 12 21Z"/><path d="M12 7.5c0-2 1-3.6 3-4.5M12 7.5C10.6 5.8 8.6 5.3 7 5.6"/>',
+  fish:'<path d="M3 12c3-4.5 8-6 12-3.6L20 5v14l-5-3.4C11 18 6 16.5 3 12Z"/><circle cx="8.5" cy="11" r=".9" fill="currentColor"/>',
+  meat:'<path d="M14.5 3.5a6 6 0 0 1 2.9 11.2l-2.6 1.4-2.3 2.3a2.5 2.5 0 1 1-3.3-3.3l2.3-2.3 1.4-2.6A6 6 0 0 1 14.5 3.5Z"/><path d="M8 19.5 5.2 21.8M5.5 16 3 18.5"/>',
+  dairy:'<path d="M4 15.5 13 8l7 4v6H4Z"/><path d="M4 15.5V18M9 15h.01M15 14h.01M12 17h.01"/>',
+  bakery:'<path d="M4 15c0-5 3.6-9 8-9s8 4 8 9v3H4Z"/><path d="M9 9.5c.6 1.4.6 3.6 0 5M15 9.5c-.6 1.4-.6 3.6 0 5M12 8.5v7"/>',
+  pantry:'<path d="M7 7h10v12a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2Z"/><path d="M8 3.5h8V7H8ZM7 12h10"/>',
+  drinks:'<path d="M10 3h4v4l2 3v10a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V10l2-3Z"/><path d="M8 13h8"/>',
+  galley:'<path d="M9 4h6l-1 4h-4Z"/><path d="M8 8h8l1 13H7Z"/><path d="M15 4h3l1 2"/>'
+};
+const icon = c => `<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${ICONS[c]||ICONS.pantry}</svg>`;
+let justAdded = null, justAddedLine = false;
+function bumpCount(){
+  justAddedLine = true;
+  $$("[data-count], [data-count-text]").forEach(el => { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); });
+}
+function rowHtml(p){
+  const q = cart.items[p.id];
+  const sub = [pnote(p), unitText(p.unit)].filter(Boolean).join(" · ");
+  const tags = p.tags.map(t => `<span class="tagsm ${t}">${T().tag[t]}</span>`).join("");
+  return `<div class="pr${q ? " in" : ""}${justAdded === p.id ? " just" : ""}" data-card="${p.id}">
+    <span class="pi">${icon(p.cat)}</span>
+    <span class="pt"><b>${esc(pname(p))}</b><small>${esc(sub)}</small></span>
+    <span class="ptags">${tags}</span>
+    ${q ? stepper(p.id, q, "grid")
+        : `<button type="button" class="add" data-act="add" data-id="${p.id}" data-key="add:${p.id}:grid" aria-label="${esc(T().add(pname(p)))}">${PLUS}</button>`}
+  </div>`;
+}
 function renderGrid(){
   const list = PRODUCTS.filter(p => inCat(p, cat) && matches(p));
   $("#result-count").textContent = T().results(list.length);
-  $("#grid").innerHTML = list.map(p => {
-    const q = cart.items[p.id];
-    const sub = [pnote(p), unitText(p.unit)].filter(Boolean).join(" · ");
-    const tags = p.tags.map(t => `<span class="tagsm ${t}">${T().tag[t]}</span>`).join("");
-    return `<article class="card${q ? " in" : ""}" data-card="${p.id}">
-      <div class="card-name">${esc(pname(p))}</div>
-      <div class="card-sub">${esc(sub)}</div>
-      <div class="card-foot">
-        <div class="card-tags">${tags}</div>
-        ${q ? stepper(p.id, q, "grid")
-            : `<button type="button" class="add" data-act="add" data-id="${p.id}" data-key="add:${p.id}:grid" aria-label="${esc(T().add(pname(p)))}">${PLUS}<span>${esc(T().addLabel)}</span></button>`}
-      </div>
-    </article>`;
-  }).join("");
+  let html = "";
+  if (cat === "all" && !query){            // grouped by category, like a provisioning sheet
+    CATS.slice(2).forEach(c => {
+      const g = list.filter(p => p.cat === c); if (!g.length) return;
+      html += `<h3 class="group-h">${esc(T().cat[c])}<small>${g.length}</small></h3><div class="plist">${g.map(rowHtml).join("")}</div>`;
+    });
+  } else {
+    html = list.length ? `<div class="plist">${list.map(rowHtml).join("")}</div>` : "";
+  }
+  $("#grid").innerHTML = html;
+  justAdded = null;
   const empty = list.length === 0;
   $("#empty").hidden = !empty;
   if (empty) $("#add-custom").textContent = T().addCustom(query.trim());
@@ -363,8 +399,10 @@ function renderCart(){
   $("#summary-empty").hidden = n > 0;
   $("#cart-clear").hidden = n === 0;
   $$("[data-count]").forEach(el => { el.textContent = n; el.hidden = n === 0; });
+  if (justAddedLine) { const li = $$("#cart-list .line").pop(); if (li) li.classList.add("just"); justAddedLine = false; }
   $$("[data-count-text]").forEach(el => el.textContent = n);
   updateBar();
+  updateNav(); if (wStep === 4) renderReview();
 }
 function renderAll(){
   const key = document.activeElement && document.activeElement.dataset ? document.activeElement.dataset.key : null;
@@ -387,7 +425,7 @@ function setQty(id, q){
   }
   save(); renderAll();
 }
-function addProduct(id){ setQty(id, 1); const plus = $(`[data-key="inc:${id}:grid"]`); if (plus) plus.focus({preventScroll:true}); }
+function addProduct(id){ justAdded = id; bumpCount(); setQty(id, 1); const plus = $(`[data-key="inc:${id}:grid"]`); if (plus) plus.focus({preventScroll:true}); }
 function addCustom(name){
   name = name.trim(); if (!name) return;
   const ex = cart.custom.find(c => norm(c.name) === norm(name));
@@ -426,10 +464,11 @@ function renderSeason(){
   $("#season-sea").innerHTML = li(SEASON[month].s, SS);
 }
 
-/* ================= 9. Order form ================= */
+/* ================= 9. Inquiry (4-step wizard) ================= */
 const form = $("#order-form");
 const errBox = $("#form-error");
-let lastMessage = "";
+const stepsEls = $$(".wiz-step", form);
+let wStep = 1, lastMessage = "";
 function localISO(d){ const x = new Date(d); x.setMinutes(x.getMinutes() - x.getTimezoneOffset()); return x.toISOString().slice(0,10); }
 const tomorrow = () => { const d = new Date(); d.setDate(d.getDate() + 1); return localISO(d); };
 form.date.min = tomorrow();
@@ -437,56 +476,147 @@ function fmtDate(iso){
   const [y,m,d] = iso.split("-").map(Number);
   return new Date(y, m-1, d).toLocaleDateString(lang === "el" ? "el-GR" : "en-GB", { weekday:"short", day:"numeric", month:"short", year:"numeric" });
 }
+const val = n => (form.elements[n] && form.elements[n].value || "").trim();
+const choice = n => { const i = $(`input[name="${n}"]:checked`, form); return i ? i.nextElementSibling.textContent.trim() : ""; };
+const pickedWhere = () => !!$('input[name="where"]:checked', form);
+
+// remember what was typed (per browser)
+function saveForm(){
+  const d = {}; [...new FormData(form)].forEach(([k, v]) => d[k] = v);
+  try { localStorage.setItem("ycp-form", JSON.stringify(d)); } catch(e){}
+}
+function restoreForm(){
+  let d = null; try { d = JSON.parse(localStorage.getItem("ycp-form")); } catch(e){}
+  if (!d) return;
+  Object.entries(d).forEach(([k, v]) => {
+    const els = $$(`[name="${k}"]`, form);
+    els.forEach(el => { if (el.type === "radio") el.checked = el.value === v; else el.value = v; });
+  });
+  if (form.date.value && form.date.value < tomorrow()) form.date.value = "";
+}
+
+function stepProblems(n){   // returns [fields to mark, message] or null when the wStep is complete
+  if (n === 1) return (!lines().length && !val("notes")) ? [[form.notes], T().errEmpty] : null;
+  if (n === 2){
+    const bad = [];
+    if (!pickedWhere()) bad.push($("#where-group"));
+    if (!form.date.value) bad.push(form.date);
+    else if (form.date.value < tomorrow()) return [[form.date], T().errDate];
+    return bad.length ? [bad, T().errRequired] : null;
+  }
+  if (n === 3){
+    const bad = ["name","phone","vessel"].filter(k => !val(k)).map(k => form.elements[k]);
+    if (val("phone") && val("phone").replace(/\D/g, "").length < 7) bad.push(form.phone);
+    if (val("email") && !form.email.checkValidity()) bad.push(form.email);
+    return bad.length ? [bad, T().errRequired] : null;
+  }
+  return null;
+}
+function clearMarks(){ $$(".invalid", form).forEach(el => { el.classList.remove("invalid"); el.removeAttribute("aria-invalid"); }); errBox.hidden = true; }
+function validateStep(n){
+  clearMarks();
+  const p = stepProblems(n); if (!p) return true;
+  p[0].forEach(el => { el.classList.add("invalid"); el.setAttribute("aria-invalid", "true"); });
+  errBox.textContent = p[1]; errBox.hidden = false;
+  const first = p[0][0]; (first.matches("input,textarea,select") ? first : $("input", first)).focus();
+  return false;
+}
+
+function updateNav(){
+  const n = lines().length;
+  $("#wn-1").textContent = n ? T().items(n) : (val("notes") ? T().notesOnly : "");
+  $("#wn-2").textContent = [pickedWhere() ? choice("where") : "", form.date.value ? fmtDate(form.date.value) : ""].filter(Boolean).join(" · ");
+  $("#wn-3").textContent = [val("name"), val("vessel")].filter(Boolean).join(" · ");
+  $("#wn-4").textContent = "";
+  $$("#wiz-nav li").forEach((li, i) => {
+    const s = i + 1;
+    li.classList.toggle("current", s === wStep);
+    li.classList.toggle("done", s < 4 && !stepProblems(s) && s !== wStep);
+  });
+}
+function showStep(n, scroll){
+  wStep = n;
+  stepsEls.forEach(fs => { const on = +fs.dataset.step === n; fs.hidden = !on; if (on){ fs.classList.remove("enter"); void fs.offsetWidth; fs.classList.add("enter"); } });
+  $("#wiz-num").textContent = n;
+  $("#wiz-bar").style.width = (n / 4 * 100) + "%";
+  $("#wiz-back").style.visibility = n === 1 ? "hidden" : "visible";
+  $("#wiz-next").hidden = n === 4;
+  $("#send-row").hidden = n !== 4;
+  $("#sent").hidden = true;
+  clearMarks();
+  if (n === 4) renderReview();
+  updateNav();
+  if (scroll){ const top = form.getBoundingClientRect().top; if (top < 70 || top > innerHeight * .6) form.scrollIntoView({ behavior:"smooth", block:"start" }); }
+}
+function goTo(n){   // can always go back; going forward requires the earlier steps to be complete
+  for (let s = 1; s < n; s++){ if (stepProblems(s)){ showStep(s, true); validateStep(s); return; } }
+  showStep(n, true);
+}
+
+function renderReview(){
+  const ls = lines(), L = T().msg, ed = s => `<button type="button" class="link-light" data-goto="${s}">${esc(T().edit)}</button>`;
+  const row = (k, v) => v ? `<div class="rv-row"><span>${esc(k)}</span><span>${esc(v)}</span></div>` : "";
+  const items = ls.length ? `<ul class="rv-list">${ls.map(l => `<li><span>${esc(l.name)}</span><span>${esc(l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q))}</span></li>`).join("")}</ul>` : "";
+  const pax = [val("guests") && `${val("guests")} ${L.guests.toLowerCase()}`, val("crew") && `${val("crew")} ${L.crew.toLowerCase()}`].filter(Boolean).join(" · ");
+  $("#review").innerHTML = `
+    <div class="rv"><div class="rv-h"><b>${esc(EN_OR_EL("wz.s1"))}</b>${ed(1)}</div>${items}${row(L.grade, choice("grade"))}${row(L.notes, val("notes"))}</div>
+    <div class="rv"><div class="rv-h"><b>${esc(EN_OR_EL("wz.s2"))}</b>${ed(2)}</div>
+      ${row(L.where, choice("where"))}${row(L.date, form.date.value ? `${fmtDate(form.date.value)} · ${choice("time")}` : "")}
+      ${row(L.type, choice("type"))}${row(L.berth, val("berth"))}${row(L.pax, pax)}</div>
+    <div class="rv"><div class="rv-h"><b>${esc(EN_OR_EL("wz.s3"))}</b>${ed(3)}</div>
+      ${row(L.name, val("name"))}${row(L.phone, val("phone"))}${row(L.vessel, val("vessel"))}${row(L.email, val("email"))}${row(L.role, choice("role"))}</div>`;
+}
+const EN_OR_EL = k => (lang === "el" ? EL[k] : EN[k] || "").replace(/&amp;/g, "&");
+
 function buildMessage(){
-  const M = T().msg, f = form.elements, opt = f.where.selectedOptions[0];
-  const out = [`*${M.h}*`, ""];
-  const add = (k, v) => { if (v && String(v).trim()) out.push(`${M[k]}: ${String(v).trim()}`); };
-  add("name", f.name.value); add("phone", f.phone.value); add("vessel", f.vessel.value);
-  add("where", opt && opt.value ? opt.textContent : ""); add("berth", f.berth.value);
-  add("date", f.date.value ? `${fmtDate(f.date.value)} · ${f.time.selectedOptions[0].textContent}` : "");
-  add("pax", f.pax.value);
+  const L = T().msg, out = [`*${L.h}*`, ""];
+  const add = (k, v) => { if (v) out.push(`${L[k]}: ${v}`); };
+  add("name", val("name")); add("role", choice("role")); add("phone", val("phone")); add("email", val("email")); add("vessel", val("vessel"));
+  out.push("");
+  add("where", choice("where")); add("date", form.date.value ? `${fmtDate(form.date.value)} · ${choice("time")}` : "");
+  add("type", choice("type")); add("berth", val("berth"));
+  add("pax", [val("guests") && `${val("guests")} ${L.guests.toLowerCase()}`, val("crew") && `${val("crew")} ${L.crew.toLowerCase()}`].filter(Boolean).join(" · "));
   const ls = lines();
-  if (ls.length){ out.push("", `*${M.list}*`); ls.forEach(l => out.push(`• ${l.name} — ${l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q)}`)); }
-  if (f.notes.value.trim()) out.push("", `${M.notes}:`, f.notes.value.trim());
+  if (ls.length){ out.push("", `*${L.list}* (${choice("grade")})`); ls.forEach(l => out.push(`• ${l.name} — ${l.unit === "custom" ? fmtQty(l.q) : qtyLabel(l.unit, l.q)}`)); }
+  if (val("notes")) out.push("", `${L.notes}:`, val("notes"));
   return out.join("\n");
 }
-function validate(){
-  let ok = true, msg = T().errRequired;
-  $$("input, select, textarea", form).forEach(el => {
-    let bad = el.required && !el.value.trim();
-    if (!bad && el.value && !el.checkValidity()) bad = true;
-    if (el.name === "date" && el.value && el.value < tomorrow()){ bad = true; msg = T().errDate; }
-    el.classList.toggle("invalid", bad); el.setAttribute("aria-invalid", bad);
-    if (bad) ok = false;
-  });
-  if (ok && !lines().length && !form.notes.value.trim()){
-    ok = false; msg = T().errEmpty; form.notes.classList.add("invalid"); form.notes.setAttribute("aria-invalid", true);
-  }
-  errBox.textContent = ok ? "" : msg; errBox.hidden = ok;
-  if (!ok) $(".invalid", form).focus();
-  return ok;
-}
-form.addEventListener("input", e => { if (e.target.classList.contains("invalid")) { e.target.classList.remove("invalid"); e.target.setAttribute("aria-invalid", false); } });
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  if (!validate()) return;
-  const via = (e.submitter && e.submitter.dataset.send) || "wa";
+function send(via){
+  for (let s = 1; s <= 3; s++){ if (stepProblems(s)){ showStep(s, true); validateStep(s); return; } }
   lastMessage = buildMessage();
   if (via === "mail" && CONFIG.email){
     let body = lastMessage.replace(/\*/g, "");
     if (body.length > 1800){ copyText(body); body = body.slice(0, 1500) + "\n…\n" + T().mailCut; }
-    location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(T().msg.h + " · " + form.vessel.value)}&body=${encodeURIComponent(body)}`;
+    location.href = `mailto:${CONFIG.email}?subject=${encodeURIComponent(T().msg.h + " · " + val("vessel"))}&body=${encodeURIComponent(body)}`;
   } else {
     window.open(waLink(lastMessage), "_blank", "noopener");
   }
   $("#sent").hidden = false;
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  const via = (e.submitter && e.submitter.dataset.send) || (wStep === 4 ? "wa" : "next");
+  if (via === "next"){ if (validateStep(wStep)) showStep(wStep + 1, true); return; }
+  send(via);
 });
+$("#send-mail").addEventListener("click", () => send("mail"));
+$("#wiz-back").addEventListener("click", () => showStep(Math.max(1, wStep - 1), true));
+form.addEventListener("input", e => { if (e.target.classList.contains("invalid")) { e.target.classList.remove("invalid"); e.target.removeAttribute("aria-invalid"); } saveForm(); updateNav(); });
+form.addEventListener("change", e => { if (e.target.name === "where") $("#where-group").classList.remove("invalid"); saveForm(); updateNav(); });
 function copyText(t){
   if (navigator.clipboard) return navigator.clipboard.writeText(t).catch(() => {});
   const a = document.createElement("textarea"); a.value = t; document.body.appendChild(a); a.select();
   try { document.execCommand("copy"); } catch(e){} a.remove();
 }
 $("#copy-msg").addEventListener("click", e => { copyText(lastMessage.replace(/\*/g, "")); e.currentTarget.textContent = T().copied; });
+document.addEventListener("click", e => {    // wStep navigation: side list, review "Edit", cart "Continue"
+  const g = e.target.closest("[data-goto]"); if (!g) return;
+  const n = +g.dataset.goto;
+  if (g.tagName === "A"){ showStep(n === 2 && stepProblems(1) ? 1 : n, false); return; }   // links scroll on their own
+  goTo(n);
+});
+restoreForm();
 
 /* ================= 10. Contact links ================= */
 const waLink = text => `https://wa.me/${CONFIG.whatsapp}` + (text ? `?text=${encodeURIComponent(text)}` : "");
@@ -511,6 +641,7 @@ function setLang(next){
   document.title = T().title;
   $('meta[name="description"]').setAttribute("content", T().desc);
   updateLinks(); renderAll(); renderSeason();
+  updateNav(); if (wStep === 4) renderReview();
   try { localStorage.setItem("lang", lang); } catch(e){}
 }
 $$(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
@@ -539,11 +670,41 @@ new IntersectionObserver(es => es.forEach(en => { footerVisible = en.isIntersect
 const onScroll = () => { header.classList.toggle("scrolled", scrollY > 30); pastHero = scrollY > innerHeight * .6; updateBar(); };
 addEventListener("scroll", onScroll, { passive:true });
 
-/* ================= 13. Init ================= */
+/* ================= 13. Motion ================= */
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (!reduce){
+  document.documentElement.classList.add("motion");
+  const groups = [".head", ".why-grid > *", ".steps > li", ".pantry > li", ".season", ".regions > *", ".logistics > *",
+                  ".scope-col", ".terms > div", ".dates > li", ".pricing-intro", ".order-intro", ".form", ".faq details", ".footer-panel"];
+  const io = new IntersectionObserver(es => es.forEach(en => {
+    if (en.isIntersecting){ en.target.classList.add("in"); io.unobserve(en.target); }
+  }), { rootMargin:"0px 0px -8% 0px" });
+  groups.forEach(sel => $$(sel).forEach((el, i) => { el.classList.add("reveal"); el.style.setProperty("--i", i % 6); io.observe(el); }));
+  const m1 = $(".hero-media .m1"), m2 = $(".hero-media .m2");   // hero photos drift on scroll
+  addEventListener("scroll", () => {
+    if (scrollY > innerHeight || innerWidth < 1100) return;
+    m1.style.translate = `0 ${scrollY * .06}px`; m2.style.translate = `0 ${scrollY * -.05}px`;
+  }, { passive:true });
+}
+const how = $("#how"), stepsLine = $(".steps-line"), stepEls = $$(".steps > li");   // progress line in "How it works"
+function stepsProgress(){
+  const r = how.getBoundingClientRect(), vh = innerHeight;
+  const p = Math.min(1, Math.max(0, (vh * .75 - r.top) / (r.height * .7)));
+  stepsLine.style.setProperty("--p", p.toFixed(3));
+  stepEls.forEach((el, i) => el.classList.toggle("on", p >= (i + .5) / stepEls.length));
+}
+addEventListener("scroll", stepsProgress, { passive:true }); stepsProgress();
+const navLinks = $$(".nav a");   // highlight the nav link of the section in view
+const secIO = new IntersectionObserver(es => es.forEach(en => {
+  if (en.isIntersecting) navLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + en.target.id));
+}), { rootMargin:"-45% 0px -50% 0px" });
+navLinks.forEach(a => { const sec = $(a.getAttribute("href")); if (sec) secIO.observe(sec); });
+
+/* ================= 14. Init ================= */
 $$("[data-i18n]").forEach(el => { if (!(el.dataset.i18n in EN)) EN[el.dataset.i18n] = el.innerHTML; });
 $$("[data-i18n-ph]").forEach(el => EN["ph:" + el.dataset.i18nPh] = el.placeholder);
 $$("[data-i18n-aria]").forEach(el => EN["aria:" + el.dataset.i18nAria] = el.getAttribute("aria-label"));
 $("#year").textContent = new Date().getFullYear();
 let saved = null; try { saved = localStorage.getItem("lang"); } catch(e){}
 setLang(saved === "el" || saved === "en" ? saved : ((navigator.language || "").toLowerCase().startsWith("el") ? "el" : "en"));
-setMenu(false); onScroll();
+setMenu(false); onScroll(); showStep(1, false);
